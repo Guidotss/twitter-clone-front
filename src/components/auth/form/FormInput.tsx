@@ -45,12 +45,13 @@ export const  FormInput = ({
             }`}
         placeholder={placeholder}
         name={name}
-        type="text"
+        type={name === "email" ? "email" : "text"}
         value={field}
         maxLength={50}
         onChange={(e) =>
           setForm((prev) => ({ ...prev, [name]: e.target.value }))
         }
+        
       />
 
       <div className="flex justify-end -mt-12">

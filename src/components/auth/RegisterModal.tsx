@@ -1,8 +1,9 @@
 "use client";
 import { useContext, useState } from "react";
-import { CloseIcon, LeftArrowIcon } from "..";
-import { RegisterForm } from "./form/RegisterForm";
 import { UiContext } from "@/context/ui";
+import { RegisterForm } from "./form/RegisterForm";
+import { CloseIcon, LeftArrowIcon } from "..";
+import "animate.css";
 
 export const RegisterModal = () => {
   const [formStep, setFormStep] = useState<number>(1);
@@ -14,7 +15,7 @@ export const RegisterModal = () => {
   };
   return (
     isModalOpen && (
-      <div className="absolute h-full w-full flex flex-col items-center justify-center bg-transparent bg-opacity-40 bg-gray-600">
+      <div className="absolute h-full w-full flex flex-col items-center justify-center bg-transparent bg-opacity-40 bg-gray-400 animate__animated animate__fadeIn animate__faster">
         <div className="bg-black w-[30vw] h-[60vh] rounded-xl">
           <div className="flex items-center">
             <div className="ml-2 mt-2 w-9 h-9 rounded-full flex items-center justify-center hover:bg-gray-400 hover:bg-opacity-20 transition-colors duration-300 ease-in-out">

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { FormInput } from "./FormInput";
+import { EmailAuthCredential } from "firebase/auth";
 
 type RegisterForm = {
   name: string;
@@ -13,7 +14,7 @@ interface RegisterFormProps {
 }
 
 export const RegisterForm = ({ currentStep, setStep }: RegisterFormProps) => {
-  const [form, setForm] = useState<RegisterForm>({
+  const [{name, email}, setForm] = useState<RegisterForm>({
     name: "",
     email: "",
   });
@@ -23,19 +24,24 @@ export const RegisterForm = ({ currentStep, setStep }: RegisterFormProps) => {
     passwordConfirmation: "",
   });
 
+  const handleNextStep = () => {
+    if(!email.includes("@")) return;
+    setStep(2);
+  }
+
   return (
     <form className="flex flex-col gap-y-20">
       {currentStep === 1 ? (
         <>
           <FormInput
-            field={form.name}
+            field={name}
             name="name"
             placeholder="Nombre"
             setForm={setForm}
             errorMessage="¿Cómo te llamas?"
           />
           <FormInput
-            field={form.email}
+            field={email}
             name="email"
             placeholder="Correo electrónico"
             setForm={setForm}
@@ -43,13 +49,13 @@ export const RegisterForm = ({ currentStep, setStep }: RegisterFormProps) => {
           />
           <button
             className={`bg-slate-200 text-black font-semibold text-lg rounded-full py-3 mt-28 ${
-              form.name.length === 0 || form.email.length === 0
+              name.length === 0 || email.length === 0
                 ? "opacity-50"
                 : "hover:opacity-90 transition-colors duration-300 ease-in-out"
             } focus:outline-none`}
             type="button"
-            disabled={form.name.length === 0 || form.email.length === 0}
-            onClick={() => setStep(2)}
+            disabled={name.length === 0 || email.length === 0}
+            onClick={handleNextStep}
           >
             Siguiente
           </button>
@@ -99,7 +105,7 @@ export const RegisterForm = ({ currentStep, setStep }: RegisterFormProps) => {
                 : "hover:opacity-90 transition-colors duration-300 ease-in-out"
             } focus:outline-none`}
             type="button"
-            disabled={form.name.length === 0 || form.email.length === 0}
+            disabled={password.length === 0 || passwordConfirmation.length === 0}
             onClick={() => setStep(1)}
           >
             Registrarse
