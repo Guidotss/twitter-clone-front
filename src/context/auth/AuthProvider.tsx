@@ -1,54 +1,103 @@
-"use client"
-import { FC,useReducer  } from 'react';
-import { AuthContext, authReducer } from '.'
-import { signInWithGithub, signInWithGoogle } from '@/firebase';
+"use client";
+import { FC, useReducer } from "react";
+import Cookies from "js-cookie";
+import { AuthContext, authReducer } from ".";
+import { signInWithGithub, signInWithGoogle } from "@/firebase";
+import { User } from "@/interfaces";
 
-
-
-interface AuthProviderProps { 
-    children : React.ReactNode; 
+interface AuthProviderProps {
+  children: React.ReactNode;
 }
-
 
 export interface AuthState {
-    user : any; 
+  user: User | null;
 }
 
-export const AUTH_INITIAL_STATE : AuthState = {
-    user : null
-}
+export const AUTH_INITIAL_STATE: AuthState = {
+  user: null,
+};
 
+export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
+  const [state, dispatch] = useReducer(authReducer, AUTH_INITIAL_STATE);
 
-export const AuthProvider : FC<AuthProviderProps> = ({ children }) => { 
-
-    const [ state, dispatch ] = useReducer(authReducer, AUTH_INITIAL_STATE); 
-
-    const startLoginWithGoolge = async () => {
-        try{ 
-            let user; 
-            const result = await signInWithGoogle(); 
-        }catch(error){ 
-            console.log(error); 
-        }
+  const startLoginWithGoolge = async () => {
+    try {
+      const result = await signInWithGoogle();
+      if (result.ok) {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/auth/login/google`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify({
+              name: result.user?.name,
+              email: result.user?.email,
+            }),
+          }
+        );
+        const data = await response.json();
+        dispatch({
+          type: "[AUTH] - login",
+          payload: data.user,
+        });
+        Cookies.set("token", data.token);
+      }
+    } catch (error) {
+      console.log(error);
+      Cookies.remove("token");
+      dispatch({
+        type: "[AUTH] - logout",
+      });
     }
+  };
 
-    const startLoginWithGithub = async () => {
-        try{ 
-            let user; 
-            const result = await signInWithGithub(); 
-        }catch(error){ 
-            console.log(error); 
-        }
+  const startLoginWithGithub = async () => {
+    try {
+      const result = await signInWithGithub();
+      if (result.ok) {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/auth/login/github`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify({
+              name: result.user?.name,
+              email: result.user?.email,
+            }),
+          }
+        );
+        const data = await response.json();
+        dispatch({
+          type: "[AUTH] - login",
+          payload: data.user,
+        });
+        Cookies.set("token", data.token);
+      }
+    } catch (error) {
+      console.log(error);
+      Cookies.remove("token");
+      dispatch({
+        type: "[AUTH] - logout",
+      });
     }
+  };
 
-    return (
-        <AuthContext.Provider value={{ 
-            ...state,
+  return (
+    <AuthContext.Provider
+      value={{
+        ...state,
 
-            startLoginWithGoolge,
-            startLoginWithGithub,
-        }}> 
-            { children }
-        </AuthContext.Provider>
-    )
-}
+        startLoginWithGoolge,
+        startLoginWithGithub,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+};
