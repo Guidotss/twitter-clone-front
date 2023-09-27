@@ -14,7 +14,7 @@ interface RegisterFormProps {
 }
 
 export const RegisterForm = ({ currentStep, setStep }: RegisterFormProps) => {
-  const [{name, email}, setForm] = useState<RegisterForm>({
+  const [{ name, email }, setForm] = useState<RegisterForm>({
     name: "",
     email: "",
   });
@@ -25,9 +25,9 @@ export const RegisterForm = ({ currentStep, setStep }: RegisterFormProps) => {
   });
 
   const handleNextStep = () => {
-    if(!email.includes("@")) return;
+    if (!email.includes("@")) return;
     setStep(2);
-  }
+  };
 
   return (
     <form className="flex flex-col gap-y-20">
@@ -105,7 +105,9 @@ export const RegisterForm = ({ currentStep, setStep }: RegisterFormProps) => {
                 : "hover:opacity-90 transition-colors duration-300 ease-in-out"
             } focus:outline-none`}
             type="button"
-            disabled={password.length === 0 || passwordConfirmation.length === 0}
+            disabled={
+              password.length === 0 || passwordConfirmation.length === 0
+            }
             onClick={() => setStep(1)}
           >
             Registrarse
