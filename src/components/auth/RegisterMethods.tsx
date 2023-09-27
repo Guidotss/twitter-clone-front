@@ -2,23 +2,32 @@
 import { use, useContext } from "react";
 import { GitHubIcon, GoogleIcon } from "..";
 import { AuthContext } from "@/context/auth";
+import { UiContext } from "@/context/ui";
 
 export const RegisterMethods = () => {
-    
-    const { startLoginWithGoolge, startLoginWithGithub } = useContext(AuthContext);
+  const { startLoginWithGoolge, startLoginWithGithub } =
+    useContext(AuthContext);
+  const { openModal } = useContext(UiContext);
 
-    const handleLoginWithGoogle = async () => {
-        await startLoginWithGoolge(); 
-    }
-    const handleLoginWithGithub = async () => {
-        await startLoginWithGithub(); 
-    }
+  const handleLoginWithGoogle = async () => {
+    await startLoginWithGoolge();
+  };
+  const handleLoginWithGithub = async () => {
+    await startLoginWithGithub();
+  };
+
+  const handleOpenModal = () => {
+    openModal();
+  };
 
   return (
     <>
       <ul className="flex flex-col gap-y-4 mt-10">
         <li>
-          <button className="bg-white px-12 py-[6px] rounded-full flex gap-x-4 items-center focus:outline-none" onClick={handleLoginWithGoogle}>
+          <button
+            className="bg-white px-12 py-[6px] rounded-full flex gap-x-4 items-center focus:outline-none"
+            onClick={handleLoginWithGoogle}
+          >
             <figure>
               <GoogleIcon />
             </figure>
@@ -28,7 +37,10 @@ export const RegisterMethods = () => {
           </button>
         </li>
         <li>
-          <button className="bg-white px-12 py-[6px] rounded-full flex gap-x-4 items-center focus:outline-none" onClick={handleLoginWithGithub}>
+          <button
+            className="bg-white px-12 py-[6px] rounded-full flex gap-x-4 items-center focus:outline-none"
+            onClick={handleLoginWithGithub}
+          >
             <figure>
               <GitHubIcon />
             </figure>
@@ -43,7 +55,10 @@ export const RegisterMethods = () => {
         <span className="2xl:-mt-1">o</span>
         <div className="h-[.5px] w-32 bg-gray-500" />
       </div>
-      <button className="bg-twitter 2xl:w-72 rounded-full py-2 mt-2 hover:bg-opacity-95 transition-colors duration-300 ease-in-out focus:outline-none">
+      <button
+        className="bg-twitter 2xl:w-72 rounded-full py-2 mt-2 hover:bg-opacity-95 transition-colors duration-300 ease-in-out focus:outline-none"
+        onClick={handleOpenModal}
+      >
         <span className=" text-[14px] font-bold">Crear Cuenta</span>
       </button>
     </>
