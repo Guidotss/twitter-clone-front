@@ -1,11 +1,10 @@
-import { GitHubIcon, GoogleIcon, TwitterIcon } from "@/components";
-import { LoginButton, RegisterMethods } from "@/components/auth";
+import { TwitterIcon } from "@/components";
+import { LoginButton, RegisterMethods, RegisterModal } from "@/components/auth";
 import Link from "next/link";
-
 
 export default function Home() {
   return (
-    <main className="flex flex-col w-full h-screen px-10">
+    <main className="flex flex-col w-full h-screen ">
       <section className="flex 2xl:w-full 2xl:h-full 2xl:items-center justify-between gap-x-40">
         <div className="w-full flex items-center justify-center">
           <figure className="2xl:w-[400px]">
@@ -17,7 +16,7 @@ export default function Home() {
             Lo que está pasando ahora
           </h1>
           <h2 className="text-3xl font-extrabold mt-14">Únete Hoy</h2>
-            <RegisterMethods/>
+          <RegisterMethods />
           <div className="flex flex-col">
             <div className="w-80 mt-3 font-extralight text-[11px]">
               <span>Al registrarte, aceptas los </span>
@@ -47,10 +46,11 @@ export default function Home() {
           </div>
           <div className="flex flex-col mt-10 text-lg font-semibold">
             <h4>¿Ya tienes una cuenta?</h4>
-            <LoginButton/>
+            <LoginButton />
           </div>
         </div>
       </section>
+        <RegisterModal/>
     </main>
   );
 }
