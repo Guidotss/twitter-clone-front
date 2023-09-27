@@ -1,13 +1,24 @@
 "use client";
-
+import { use, useContext } from "react";
 import { GitHubIcon, GoogleIcon } from "..";
+import { AuthContext } from "@/context/auth";
 
 export const RegisterMethods = () => {
+    
+    const { startLoginWithGoolge, startLoginWithGithub } = useContext(AuthContext);
+
+    const handleLoginWithGoogle = async () => {
+        await startLoginWithGoolge(); 
+    }
+    const handleLoginWithGithub = async () => {
+        await startLoginWithGithub(); 
+    }
+
   return (
     <>
       <ul className="flex flex-col gap-y-4 mt-10">
         <li>
-          <button className="bg-white px-12 py-[6px] rounded-full flex gap-x-4 items-center focus:outline-none">
+          <button className="bg-white px-12 py-[6px] rounded-full flex gap-x-4 items-center focus:outline-none" onClick={handleLoginWithGoogle}>
             <figure>
               <GoogleIcon />
             </figure>
@@ -17,7 +28,7 @@ export const RegisterMethods = () => {
           </button>
         </li>
         <li>
-          <button className="bg-white px-12 py-[6px] rounded-full flex gap-x-4 items-center focus:outline-none">
+          <button className="bg-white px-12 py-[6px] rounded-full flex gap-x-4 items-center focus:outline-none" onClick={handleLoginWithGithub}>
             <figure>
               <GitHubIcon />
             </figure>
