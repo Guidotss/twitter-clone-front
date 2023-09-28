@@ -20,6 +20,45 @@ export const AUTH_INITIAL_STATE: AuthState = {
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, AUTH_INITIAL_STATE);
 
+  const registerUser = async (
+    name: string,
+    email: string,
+    password: string
+  ) => {
+    const user = {
+      name,
+      email,
+      password,
+    };
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+          body: JSON.stringify(user),
+        }
+      );
+      const data = await response.json();
+      if (data.ok) {
+        dispatch({
+          type: "[AUTH] - login",
+          payload: data.user,
+        });
+        Cookies.set("token", data.token);
+        console.log(data);
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
+
   const startLoginWithGoolge = async () => {
     try {
       const result = await signInWithGoogle();
@@ -95,6 +134,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
         startLoginWithGoolge,
         startLoginWithGithub,
+        registerUser,
       }}
     >
       {children}

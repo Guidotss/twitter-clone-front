@@ -1,7 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FormInput } from "./FormInput";
-import { EmailAuthCredential } from "firebase/auth";
+import { AuthContext } from "@/context/auth";
 
 type RegisterForm = {
   name: string;
@@ -14,6 +14,7 @@ interface RegisterFormProps {
 }
 
 export const RegisterForm = ({ currentStep, setStep }: RegisterFormProps) => {
+  const { registerUser } = useContext(AuthContext);
   const [{ name, email }, setForm] = useState<RegisterForm>({
     name: "",
     email: "",
@@ -26,7 +27,14 @@ export const RegisterForm = ({ currentStep, setStep }: RegisterFormProps) => {
 
   const handleNextStep = () => {
     if (!email.includes("@")) return;
+    
     setStep(2);
+  };
+
+  const handleRegister = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password !== passwordConfirmation) return;
+    registerUser(name, email, password);
   };
 
   return (
@@ -100,15 +108,19 @@ export const RegisterForm = ({ currentStep, setStep }: RegisterFormProps) => {
           </div>
           <button
             className={`bg-twitter text-white font-semibold text-lg rounded-full py-3 mt-10 ${
-              password.length === 0 || passwordConfirmation.length === 0
+              password.length === 0 ||
+              passwordConfirmation.length === 0 ||
+              password !== passwordConfirmation
                 ? "opacity-50"
                 : "hover:opacity-90 transition-colors duration-300 ease-in-out"
             } focus:outline-none`}
             type="button"
             disabled={
-              password.length === 0 || passwordConfirmation.length === 0
+              password.length === 0 ||
+              passwordConfirmation.length === 0 ||
+              password !== passwordConfirmation
             }
-            onClick={() => setStep(1)}
+            onClick={handleRegister}
           >
             Registrarse
           </button>
