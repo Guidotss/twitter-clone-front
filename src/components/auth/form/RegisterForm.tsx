@@ -20,6 +20,8 @@ export const RegisterForm = ({ currentStep, setStep }: RegisterFormProps) => {
     email: "",
   });
 
+  
+
   const [{ password, passwordConfirmation }, setPassword] = useState({
     password: "",
     passwordConfirmation: "",
@@ -27,7 +29,7 @@ export const RegisterForm = ({ currentStep, setStep }: RegisterFormProps) => {
 
   const handleNextStep = () => {
     if (!email.includes("@")) return;
-    
+
     setStep(2);
   };
 

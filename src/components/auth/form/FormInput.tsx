@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 
 
@@ -7,7 +8,18 @@ interface InputProps {
   placeholder: string;
   errorMessage: string;
   style?: string;
-  setForm: React.Dispatch<React.SetStateAction<any>>;
+  setForm : React.Dispatch<React.SetStateAction< any >>;
+}
+
+interface RegisterForm {
+  name: string;
+  email: string;
+  password: string; 
+}
+
+interface LoginForm {
+  email: string;
+  password: string;
 }
 
 
@@ -49,7 +61,10 @@ export const  FormInput = ({
         value={field}
         maxLength={50}
         onChange={(e) =>
-          setForm((prev) => ({ ...prev, [name]: e.target.value }))
+          setForm((prev: RegisterForm | LoginForm) => ({
+            ...prev,
+            [name]: e.target.value,
+          }))
         }
         
       />
