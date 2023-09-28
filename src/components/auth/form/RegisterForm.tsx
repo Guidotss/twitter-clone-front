@@ -40,7 +40,7 @@ export const RegisterForm = ({ currentStep, setStep }: RegisterFormProps) => {
   };
 
   return (
-    <form className="flex flex-col gap-y-20">
+    <form className="flex flex-col 2xl:gap-y-20 lg:gap-y-10">
       {currentStep === 1 ? (
         <>
           <FormInput
@@ -49,6 +49,7 @@ export const RegisterForm = ({ currentStep, setStep }: RegisterFormProps) => {
             placeholder="Nombre"
             setForm={setForm}
             errorMessage="¿Cómo te llamas?"
+            style="lg:w-[380px]"
           />
           <FormInput
             field={email}
@@ -56,9 +57,10 @@ export const RegisterForm = ({ currentStep, setStep }: RegisterFormProps) => {
             placeholder="Correo electrónico"
             setForm={setForm}
             errorMessage="¿Cuál es tu correo electrónico?"
+            style="lg:w-[380px]"
           />
           <button
-            className={`bg-slate-200 text-black font-semibold text-lg rounded-full py-3 mt-28 ${
+            className={`bg-slate-200 text-black font-semibold text-lg rounded-full py-3 2xl:mt-28  ${
               name.length === 0 || email.length === 0
                 ? "opacity-50"
                 : "hover:opacity-90 transition-colors duration-300 ease-in-out"
@@ -74,7 +76,7 @@ export const RegisterForm = ({ currentStep, setStep }: RegisterFormProps) => {
         <>
           <div>
             <input
-              className={`bg-transparent border-[1px] border-gray-500 2xl:w-[430px] rounded-md px-5 py-4 text-gray-500 text-md font-light focus:outline-none focus:border-twitter transition-colors duration-300 ease-in-out
+              className={`bg-transparent border-[1px] border-gray-500 2xl:w-[430px] lg:w-[380px] rounded-md px-5 py-4 text-gray-500 text-md font-light focus:outline-none focus:border-twitter transition-colors duration-300 ease-in-out
               ${password.length < 10 ? "border-gray-300" : "border-red-500"}
             }`}
               placeholder="Contraseña"
@@ -88,7 +90,7 @@ export const RegisterForm = ({ currentStep, setStep }: RegisterFormProps) => {
           </div>
           <div>
             <input
-              className={`bg-transparent border-[1px] border-gray-500 2xl:w-[430px] rounded-md px-5 py-4 text-gray-500 text-md font-light focus:outline-none focus:border-twitter transition-colors duration-300 ease-in-out
+              className={`bg-transparent border-[1px] border-gray-500 2xl:w-[430px] lg:w-[380px] rounded-md px-5 py-4 text-gray-500 text-md font-light focus:outline-none focus:border-twitter transition-colors duration-300 ease-in-out
               ${password.length < 10 ? "border-gray-300" : "border-red-500"}
             }`}
               placeholder="Confirmar contraseña"
@@ -109,7 +111,7 @@ export const RegisterForm = ({ currentStep, setStep }: RegisterFormProps) => {
             )}
           </div>
           <button
-            className={`bg-twitter text-white font-semibold text-lg rounded-full py-3 mt-10 ${
+            className={`bg-twitter text-white font-semibold text-lg rounded-full py-3 2xl:mt-10 ${
               password.length === 0 ||
               passwordConfirmation.length === 0 ||
               password !== passwordConfirmation

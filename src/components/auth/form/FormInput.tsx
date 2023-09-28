@@ -50,7 +50,7 @@ export const  FormInput = ({
   setForm,
 }: InputProps)  => {
   return (
-    <div>
+    <div className="flex flex-col">
       <input
         className={`bg-transparent border-[1px] border-gray-500  ${style ? style : '2xl:w-[430px]'} rounded-md  px-4 h-16 text-gray-500 text-md font-light focus:outline-none focus:border-twitter transition-colors duration-300 ease-in-out
               ${field.length > 0 ? "border-gray-300" : "border-red-500"}
@@ -69,11 +69,11 @@ export const  FormInput = ({
         
       />
 
-      <div className="flex justify-end -mt-12 mr-2">
+      <div className="flex justify-end 2xl:absolute 2xl:mr-2 mt-2">
         <CharactersCounter word={field} />
       </div>
       {field.length == 0 && (
-        <span className="absolute mt-10 text-xs font-extralight text-red-500">
+        <span className="2xl:absolute 2xl:mt-10 lg:-mt-5  text-xs font-extralight text-red-500">
           {errorMessage}
         </span>
       )}
