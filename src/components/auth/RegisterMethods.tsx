@@ -4,10 +4,14 @@ import { GitHubIcon, GoogleIcon } from "..";
 import { AuthContext } from "@/context/auth";
 import { UiContext } from "@/context/ui";
 
-export const RegisterMethods = () => {
+export const RegisterMethods = ({
+  isInLoginModal,
+}: {
+  isInLoginModal?: boolean;
+}) => {
   const { startLoginWithGoolge, startLoginWithGithub } =
     useContext(AuthContext);
-  const { openModal } = useContext(UiContext);
+  const { openRegisterModal } = useContext(UiContext);
 
   const handleLoginWithGoogle = async () => {
     await startLoginWithGoolge();
@@ -16,8 +20,8 @@ export const RegisterMethods = () => {
     await startLoginWithGithub();
   };
 
-  const handleOpenModal = () => {
-    openModal();
+  const handleOpenRegisterModal = () => {
+    openRegisterModal();
   };
 
   return (
@@ -55,12 +59,14 @@ export const RegisterMethods = () => {
         <span className="2xl:-mt-1">o</span>
         <div className="h-[.5px] w-32 bg-gray-500" />
       </div>
-      <button
-        className="bg-twitter 2xl:w-72 rounded-full py-2 mt-2 hover:bg-opacity-95 transition-colors duration-300 ease-in-out focus:outline-none"
-        onClick={handleOpenModal}
-      >
-        <span className=" text-[14px] font-bold">Crear Cuenta</span>
-      </button>
+      {!isInLoginModal && (
+        <button
+          className="bg-twitter 2xl:w-72 rounded-full py-2 mt-2 hover:bg-opacity-95 transition-colors duration-300 ease-in-out focus:outline-none"
+          onClick={handleOpenRegisterModal}
+        >
+          <span className=" text-[14px] font-bold">Crear Cuenta</span>
+        </button>
+      )}
     </>
   );
 };

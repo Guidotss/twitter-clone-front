@@ -2,9 +2,13 @@
 import { createContext } from "react";
 
 interface UiContext {
-  isModalOpen: boolean;
-  openModal: () => void;
-  closeModal: () => void;
+  isLoginModalOpen: boolean;
+  isRegisterModalOpen: boolean;
+  
+  openRegisterModal: () => void;
+  closeRegisterModal: () => void;
+  openLoginModal: () => void;
+  closeLoginModal: () => void;
 }
 
 export const UiContext = createContext({} as UiContext);

@@ -1,19 +1,35 @@
 import { UiState } from ".";
 
-type UiActionType = { type: "[UI] open-modal" } | { type: "[UI] close-modal" };
+type UiActionType =
+  | { type: "[UI] open-register-modal" }
+  | { type: "[UI] close-register-modal" }
+  | { type: "[UI] open-login-modal" }
+  | { type: "[UI] close-login-modal" };
 
 export const uiReducer = (state: UiState, action: UiActionType): UiState => {
   switch (action.type) {
-    case "[UI] open-modal":
+    case "[UI] open-register-modal":
       return {
         ...state,
-        isModalOpen: true,
+        isRegisterModalOpen: true,
       };
-    case "[UI] close-modal":
+    case "[UI] close-register-modal":
       return {
         ...state,
-        isModalOpen: false,
+        isRegisterModalOpen: false,
       };
+
+    case "[UI] open-login-modal":
+      return {
+        ...state,
+        isLoginModalOpen: true,
+      };
+    case "[UI] close-login-modal":
+      return {
+        ...state,
+        isLoginModalOpen: false,
+      };
+
     default:
       return state;
   }

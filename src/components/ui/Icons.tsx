@@ -1,5 +1,16 @@
-export const TwitterIcon = () => (
-  <svg fill="#E5E7EB" viewBox="0 0 24 24" aria-hidden="true">
+interface IconProps {
+  height?: string;
+  width?: string;
+}
+
+export const TwitterIcon = ({ height, width }: IconProps) => (
+  <svg
+    fill="#E5E7EB"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+    width={width || "400px"}
+    height={height || "400px"}
+  >
     <g>
       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
     </g>
@@ -53,12 +64,7 @@ export const CloseIcon = () => (
 );
 
 export const LeftArrowIcon = () => (
-  <svg
-    viewBox="0 0 24 24"
-    aria-hidden="true"
-    width="20px"
-    fill="#E5E7EB"
-  >
+  <svg viewBox="0 0 24 24" aria-hidden="true" width="20px" fill="#E5E7EB">
     <g>
       <path d="M7.414 13l5.043 5.04-1.414 1.42L3.586 12l7.457-7.46 1.414 1.42L7.414 11H21v2H7.414z"></path>
     </g>

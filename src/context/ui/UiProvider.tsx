@@ -8,26 +8,33 @@ interface UiProviderProps {
 }
 
 export interface UiState {
-  isModalOpen: boolean;
+  isRegisterModalOpen: boolean;
+    isLoginModalOpen: boolean;
 }
 
 
 const UI_INITIAL_STATE: UiState = {
-    isModalOpen: false,
+    isRegisterModalOpen: false,
+    isLoginModalOpen: false,
 }
 
 export const UiProvider: FC<UiProviderProps> = ({ children }) => { 
     const [ state, dispatch ] = useReducer(uiReducer, UI_INITIAL_STATE);
 
-    const openModal = () => dispatch({ type: '[UI] open-modal' });
-    const closeModal = () => dispatch({ type: '[UI] close-modal' });
+    const openRegisterModal = () => dispatch({ type: '[UI] open-register-modal' });
+    const closeRegisterModal = () => dispatch({ type: '[UI] close-register-modal' });
+
+    const openLoginModal = () => dispatch({ type: '[UI] open-login-modal' });
+    const closeLoginModal = () => dispatch({ type: '[UI] close-login-modal' });
 
     return ( 
         <UiContext.Provider value={{
             ...state,
 
-            openModal,
-            closeModal,
+            openRegisterModal,
+            closeRegisterModal,
+            openLoginModal,
+            closeLoginModal,
         }} >
             {children}
         </UiContext.Provider>

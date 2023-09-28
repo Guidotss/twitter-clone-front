@@ -1,5 +1,5 @@
 import { TwitterIcon } from "@/components";
-import { LoginButton, RegisterMethods, RegisterModal } from "@/components/auth";
+import { LoginButton, LoginModal, RegisterMethods, RegisterModal } from "@/components/auth";
 import Link from "next/link";
 
 export default function Home() {
@@ -51,6 +51,7 @@ export default function Home() {
         </div>
       </section>
         <RegisterModal/>
+        <LoginModal/>
     </main>
   );
 }
