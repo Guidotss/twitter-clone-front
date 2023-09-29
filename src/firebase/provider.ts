@@ -1,4 +1,8 @@
-import { GoogleAuthProvider, signInWithPopup, GithubAuthProvider } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  GithubAuthProvider,
+} from "firebase/auth";
 import { firebaseAuth } from "./config";
 
 const googleProvider = new GoogleAuthProvider();
@@ -26,12 +30,11 @@ export const signInWithGoogle = async () => {
   }
 };
 
-
 export const signInWithGithub = async () => {
   const result = await signInWithPopup(firebaseAuth, githubProvider);
   const { displayName, email, uid, providerId, photoURL } = result.user;
 
-  try{ 
+  try {
     return {
       ok: true,
       user: {
@@ -42,11 +45,11 @@ export const signInWithGithub = async () => {
         photoURL,
       },
     };
-  }catch(error){ 
+  } catch (error) {
     console.log(error);
     return {
       ok: false,
       error: "Github Login Fail",
     };
   }
-}
+};

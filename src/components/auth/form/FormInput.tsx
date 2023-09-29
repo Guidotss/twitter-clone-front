@@ -1,6 +1,4 @@
-
 import { useEffect, useState } from "react";
-
 
 interface InputProps {
   field: string;
@@ -9,21 +7,19 @@ interface InputProps {
   errorMessage: string;
   style?: string;
   isInLoginModal?: boolean;
-  setForm : React.Dispatch<React.SetStateAction< any >>;
+  setForm: React.Dispatch<React.SetStateAction<any>>;
 }
 
 interface RegisterForm {
   name: string;
   email: string;
-  password: string; 
+  password: string;
 }
 
 interface LoginForm {
   email: string;
   password: string;
 }
-
-
 
 function CharactersCounter({ word }: { word: string }) {
   const [currentCharacters, setCurrentCharacters] = useState<number>(0);
@@ -42,7 +38,7 @@ function CharactersCounter({ word }: { word: string }) {
   );
 }
 
-export const  FormInput = ({
+export const FormInput = ({
   field,
   name,
   placeholder,
@@ -50,16 +46,18 @@ export const  FormInput = ({
   style,
   isInLoginModal,
   setForm,
-}: InputProps)  => {
+}: InputProps) => {
   return (
     <div className="flex flex-col lg:w-[380px]">
-      {!isInLoginModal && ( 
+      {!isInLoginModal && (
         <div className="self-end absolute lg:mt-2 lg:mr-3">
           <CharactersCounter word={field} />
         </div>
       )}
       <input
-        className={`bg-transparent border-[1px] border-gray-500  ${style ? style : '2xl:w-[430px]'} rounded-md  px-4 h-16 text-gray-500 text-md font-light focus:outline-none focus:border-twitter transition-colors duration-300 ease-in-out
+        className={`bg-transparent border-[1px] border-gray-500  ${
+          style ? style : "2xl:w-[430px]"
+        } rounded-md  px-4 h-16 text-gray-500 text-md font-light focus:outline-none focus:border-twitter transition-colors duration-300 ease-in-out
               ${field.length > 0 ? "border-gray-300" : "border-red-500"}
             }`}
         placeholder={placeholder}
@@ -73,9 +71,8 @@ export const  FormInput = ({
             [name]: e.target.value,
           }))
         }
-        
       />
-      <div className="w-full"> 
+      <div className="w-full">
         {field.length == 0 && (
           <span className="2xl:absolute mt-2 text-xs font-extralight text-red-500">
             {errorMessage}
@@ -84,4 +81,4 @@ export const  FormInput = ({
       </div>
     </div>
   );
-}
+};

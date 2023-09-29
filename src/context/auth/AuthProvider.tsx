@@ -1,5 +1,5 @@
 "use client";
-import { FC, useReducer } from "react";
+import { FC, useReducer, useEffect } from "react";
 import Cookies from "js-cookie";
 import { AuthContext, authReducer } from ".";
 import { signInWithGithub, signInWithGoogle } from "@/firebase";
@@ -14,30 +14,70 @@ export interface AuthState {
 }
 
 export const AUTH_INITIAL_STATE: AuthState = {
-  user: null,
+  user: null
 };
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, AUTH_INITIAL_STATE);
 
-  const loginUser = async (email: string, password: string) => {
-    try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
-        method: "POST",
-        headers: {
+  useEffect(() => {
+    renewToken();
+  },[]);
+
+  const renewToken = async () => {
+    const token = Cookies.get("token");
+    if(!token){ 
+      dispatch({
+        type: "[AUTH] - logout",
+      });
+      return;
+    }
+    try{ 
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/renew-token`, {
+        method: "GET",
+        headers: { 
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify({ email, password }),
+          "Authorization": `Bearer ${token}`
+        }
       });
+      const data = await response.json();
+      if(data.ok){ 
+        dispatch({ 
+          type: "[AUTH] - login",
+          payload: data.user
+        });
+        Cookies.set("token", data.token);
+        return;
+      }
+    }catch(error){ 
+      console.log(error); 
+      dispatch({ 
+        type: "[AUTH] - logout"
+      });
+    }
+  };
+
+  const loginUser = async (email: string, password: string) => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
       const data = await response.json();
       if (data.ok) {
         dispatch({
           type: "[AUTH] - login",
           payload: data.user,
         });
-        Cookies.set("token", data.token);
-        console.log(data);
+        Cookies.set("token", data.token); 
         return true;
       }
       return false;
@@ -76,7 +116,6 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
           payload: data.user,
         });
         Cookies.set("token", data.token);
-        console.log(data);
         return true;
       }
       return false;
@@ -162,7 +201,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         startLoginWithGoolge,
         startLoginWithGithub,
         registerUser,
-        loginUser
+        loginUser,
       }}
     >
       {children}

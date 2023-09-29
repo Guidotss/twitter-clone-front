@@ -1,7 +1,6 @@
 "use client";
 
-import { AuthProvider } from "@/context/auth";
-import { UiProvider } from "@/context/ui";
+import { AuthProvider, UiProvider } from "@/context";
 
 interface ProviderProps {
   children: React.ReactNode;

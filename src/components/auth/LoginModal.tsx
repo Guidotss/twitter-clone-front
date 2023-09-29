@@ -16,7 +16,6 @@ export const LoginModal = () => {
     useContext(UiContext);
 
   const { loginUser } = useContext(AuthContext);
-
   const [{ email, password }, setForm] = useState<LoginForm>({
     email: "",
     password: "",

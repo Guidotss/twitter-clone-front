@@ -20,8 +20,6 @@ export const RegisterForm = ({ currentStep, setStep }: RegisterFormProps) => {
     email: "",
   });
 
-  
-
   const [{ password, passwordConfirmation }, setPassword] = useState({
     password: "",
     passwordConfirmation: "",

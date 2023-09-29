@@ -4,7 +4,7 @@ import { createContext } from "react";
 interface UiContext {
   isLoginModalOpen: boolean;
   isRegisterModalOpen: boolean;
-  
+
   openRegisterModal: () => void;
   closeRegisterModal: () => void;
   openLoginModal: () => void;
