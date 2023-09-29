@@ -61,7 +61,7 @@ export const RegisterMethods = ({
       </div>
       {!isInLoginModal && (
         <button
-          className="bg-twitter 2xl:w-72 rounded-full py-2 mt-2 hover:bg-opacity-95 transition-colors duration-300 ease-in-out focus:outline-none"
+          className="bg-twitter w-72 rounded-full py-2 mt-2 hover:bg-opacity-95 transition-colors duration-300 ease-in-out focus:outline-none"
           onClick={handleOpenRegisterModal}
         >
           <span className=" text-[14px] font-bold">Crear Cuenta</span>

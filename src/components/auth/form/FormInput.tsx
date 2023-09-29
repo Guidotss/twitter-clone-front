@@ -8,6 +8,7 @@ interface InputProps {
   placeholder: string;
   errorMessage: string;
   style?: string;
+  isInLoginModal?: boolean;
   setForm : React.Dispatch<React.SetStateAction< any >>;
 }
 
@@ -33,7 +34,7 @@ function CharactersCounter({ word }: { word: string }) {
   }, [word.length]);
 
   return (
-    <div className="flex flex-row justify-between">
+    <div className="flex flex-row">
       <span className="text-gray-500 font-light text-xs">
         {currentCharacters} / 50
       </span>
@@ -47,10 +48,16 @@ export const  FormInput = ({
   placeholder,
   errorMessage,
   style,
+  isInLoginModal,
   setForm,
 }: InputProps)  => {
   return (
-    <div>
+    <div className="flex flex-col lg:w-[380px]">
+      {!isInLoginModal && ( 
+        <div className="self-end absolute lg:mt-2 lg:mr-3">
+          <CharactersCounter word={field} />
+        </div>
+      )}
       <input
         className={`bg-transparent border-[1px] border-gray-500  ${style ? style : '2xl:w-[430px]'} rounded-md  px-4 h-16 text-gray-500 text-md font-light focus:outline-none focus:border-twitter transition-colors duration-300 ease-in-out
               ${field.length > 0 ? "border-gray-300" : "border-red-500"}
@@ -68,15 +75,13 @@ export const  FormInput = ({
         }
         
       />
-
-      <div className="flex justify-end -mt-12 mr-2">
-        <CharactersCounter word={field} />
+      <div className="w-full"> 
+        {field.length == 0 && (
+          <span className="2xl:absolute mt-2 text-xs font-extralight text-red-500">
+            {errorMessage}
+          </span>
+        )}
       </div>
-      {field.length == 0 && (
-        <span className="absolute mt-10 text-xs font-extralight text-red-500">
-          {errorMessage}
-        </span>
-      )}
     </div>
   );
 }

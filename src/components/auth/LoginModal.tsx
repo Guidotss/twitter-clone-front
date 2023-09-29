@@ -30,7 +30,7 @@ export const LoginModal = () => {
   return (
     isLoginModalOpen && (
       <div className="absolute h-full w-full flex flex-col items-center justify-center bg-modal animate__animated animate__fadeIn animate__faster z-10">
-        <div className="bg-black w-[30vw] h-[75vh] rounded-xl">
+        <div className="bg-black 2xl:w-[30vw] 2xl:h-[80vh] lg:w-[40vw]  rounded-xl lg:overflow-y-auto 2xl:overflow-hidden">
           <div className="flex items-center">
             <div className="ml-2 mt-2 w-9 h-9 rounded-full flex items-center justify-center hover:bg-gray-400 hover:bg-opacity-20 transition-colors duration-300 ease-in-out">
               <button
@@ -59,7 +59,8 @@ export const LoginModal = () => {
                   setForm={setForm}
                   errorMessage="Correo no valido"
                   placeholder="Correo"
-                  style="2xl:w-[300px]"
+                  style="2xl:w-[360px]"
+                  isInLoginModal
                 />
                 <FormInput
                   field={password}
@@ -67,7 +68,8 @@ export const LoginModal = () => {
                   setForm={setForm}
                   errorMessage="Contraseña no valida"
                   placeholder="************"
-                  style="2xl:w-[300px] mt-16"
+                  style="2xl:w-[360px] mt-10 "
+                  isInLoginModal
                 />
                 <button className="rounded-full bg-slate-50 text-black font-bold text-md w-full mt-16 py-2 hover:bg-opacity-80 transition-colors duration-300 ease-in-out">
                   Iniciar sesión
