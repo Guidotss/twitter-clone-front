@@ -4,6 +4,7 @@ import { UiContext } from "@/context/ui";
 import { CloseIcon, TwitterIcon } from "..";
 import { RegisterMethods } from "./RegisterMethods";
 import { FormInput } from "./form/FormInput";
+import { AuthContext } from "@/context/auth";
 
 type LoginForm = {
   email: string;
@@ -13,6 +14,9 @@ type LoginForm = {
 export const LoginModal = () => {
   const { closeLoginModal, openRegisterModal, isLoginModalOpen } =
     useContext(UiContext);
+
+  const { loginUser } = useContext(AuthContext);
+
   const [{ email, password }, setForm] = useState<LoginForm>({
     email: "",
     password: "",
@@ -25,6 +29,13 @@ export const LoginModal = () => {
   const handleOpenRegisterModal = () => {
     closeLoginModal();
     openRegisterModal();
+  };
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !password) return;
+    if (!email.includes("@")) return;
+
+    await loginUser(email, password);
   };
 
   return (
@@ -71,7 +82,11 @@ export const LoginModal = () => {
                   style="2xl:w-[360px] mt-10 "
                   isInLoginModal
                 />
-                <button className="rounded-full bg-slate-50 text-black font-bold text-md w-full mt-16 py-2 hover:bg-opacity-80 transition-colors duration-300 ease-in-out">
+                <button
+                  className="rounded-full bg-slate-50 text-black font-bold text-md w-full mt-16 py-2 hover:bg-opacity-80 transition-colors duration-300 ease-in-out"
+                  onClick={handleLogin}
+                  type="submit"
+                >
                   Iniciar sesión
                 </button>
                 <button className="rounded-full  text-white border-[1px] border-gray-700 font-bold text-md w-full mt-5 py-2 hover:bg-gray-700 hover:bg-opacity-30 transition-colors duration-300 ease-in-out">

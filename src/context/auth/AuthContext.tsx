@@ -8,6 +8,7 @@ interface AuthContextProps {
     startLoginWithGoolge : () => Promise<void>
     startLoginWithGithub : () => Promise<void>
     registerUser : ( name: string, email:string, password: string ) => Promise<boolean>
+    loginUser : (email: string, password: string) => Promise<boolean>
 }
 
 
