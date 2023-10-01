@@ -1,6 +1,6 @@
 "use client";
 import { use, useContext } from "react";
-import { GitHubIcon, GoogleIcon } from "..";
+import { GitHubIcon, GoogleIcon } from "../shared";
 import { AuthContext } from "@/context/auth";
 import { UiContext } from "@/context/ui";
 

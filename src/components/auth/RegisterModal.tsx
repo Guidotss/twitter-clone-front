@@ -2,7 +2,7 @@
 import { useContext, useState } from "react";
 import { UiContext } from "@/context/ui";
 import { RegisterForm } from "./form/RegisterForm";
-import { CloseIcon, LeftArrowIcon } from "..";
+import { CloseIcon, LeftArrowIcon } from "../shared";
 import "animate.css";
 
 export const RegisterModal = () => {

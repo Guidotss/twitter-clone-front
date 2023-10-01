@@ -1,4 +1,4 @@
-import { TwitterIcon } from "@/components";
+import { TwitterIcon } from "@/components/shared";
 import {
   LoginButton,
   LoginModal,

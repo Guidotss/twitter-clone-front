@@ -2,7 +2,7 @@
 import { useContext, useState } from "react";
 import { useRouter } from 'next/navigation';
 import { UiContext } from "@/context/ui";
-import { CloseIcon, TwitterIcon } from "..";
+import { CloseIcon, TwitterIcon } from "../shared";
 import { RegisterMethods } from "./RegisterMethods";
 import { FormInput } from "./form/FormInput";
 import { AuthContext } from "@/context/auth";
