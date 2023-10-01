@@ -1,8 +1,9 @@
 "use client";
 import { FC, useReducer, useEffect } from "react";
+import { signInWithGithub, signInWithGoogle } from "@/firebase";
+import { toast } from "react-hot-toast";
 import Cookies from "js-cookie";
 import { AuthContext, authReducer } from ".";
-import { signInWithGithub, signInWithGoogle } from "@/firebase";
 import { User } from "@/interfaces";
 
 interface AuthProviderProps {
@@ -14,7 +15,7 @@ export interface AuthState {
 }
 
 export const AUTH_INITIAL_STATE: AuthState = {
-  user: null
+  user: null,
 };
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
@@ -22,38 +23,41 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     renewToken();
-  },[]);
+  }, []);
 
   const renewToken = async () => {
     const token = Cookies.get("token");
-    if(!token){ 
+    if (!token) {
       dispatch({
         type: "[AUTH] - logout",
       });
       return;
     }
-    try{ 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/renew-token`, {
-        method: "GET",
-        headers: { 
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Authorization": `Bearer ${token}`
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/renew-token`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            Authorization: `Bearer ${token}`,
+          },
         }
-      });
+      );
       const data = await response.json();
-      if(data.ok){ 
-        dispatch({ 
+      if (data.ok) {
+        dispatch({
           type: "[AUTH] - login",
-          payload: data.user
+          payload: data.user,
         });
         Cookies.set("token", data.token);
         return;
       }
-    }catch(error){ 
-      console.log(error); 
-      dispatch({ 
-        type: "[AUTH] - logout"
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: "[AUTH] - logout",
       });
     }
   };
@@ -77,12 +81,28 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
           type: "[AUTH] - login",
           payload: data.user,
         });
-        Cookies.set("token", data.token); 
+        Cookies.set("token", data.token);
         return true;
       }
+      toast.error("Invalid credentials", {
+        duration: 4000,
+        style: {
+          background: "#333",
+          color: "#fff",
+        },
+        icon: "❌",
+      });
       return false;
     } catch (error) {
       console.log(error);
+      toast.error("Internal server error", {
+        duration: 4000,
+        style: {
+          background: "#333",
+          color: "#fff",
+        },
+        icon: "❌",
+      });
       return false;
     }
   };
@@ -118,9 +138,25 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         Cookies.set("token", data.token);
         return true;
       }
+      toast.error(data.error, {
+        duration: 4000,
+        style: {
+          background: "#333",
+          color: "#fff",
+        },
+        icon: "❌",
+      });
       return false;
     } catch (error) {
       console.log(error);
+      toast.error("Internal server error", {
+        duration: 4000,
+        style: {
+          background: "#333",
+          color: "#fff",
+        },
+        icon: "❌",
+      });
       return false;
     }
   };

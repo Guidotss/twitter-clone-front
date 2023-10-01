@@ -2,6 +2,7 @@
 import { useContext, useState } from "react";
 import { FormInput } from "./FormInput";
 import { AuthContext } from "@/context/auth";
+import { useRouter } from 'next/navigation'; 
 
 type RegisterForm = {
   name: string;
@@ -14,6 +15,7 @@ interface RegisterFormProps {
 }
 
 export const RegisterForm = ({ currentStep, setStep }: RegisterFormProps) => {
+  const router = useRouter(); 
   const { registerUser } = useContext(AuthContext);
   const [{ name, email }, setForm] = useState<RegisterForm>({
     name: "",
@@ -31,10 +33,13 @@ export const RegisterForm = ({ currentStep, setStep }: RegisterFormProps) => {
     setStep(2);
   };
 
-  const handleRegister = (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== passwordConfirmation) return;
-    registerUser(name, email, password);
+    const ok = await registerUser(name, email, password);
+    if(ok) { 
+      router.push('/');
+    }
   };
 
   return (

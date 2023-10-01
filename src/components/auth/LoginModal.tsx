@@ -1,5 +1,6 @@
 "use client";
 import { useContext, useState } from "react";
+import { useRouter } from 'next/navigation';
 import { UiContext } from "@/context/ui";
 import { CloseIcon, TwitterIcon } from "..";
 import { RegisterMethods } from "./RegisterMethods";
@@ -12,6 +13,7 @@ type LoginForm = {
 };
 
 export const LoginModal = () => {
+  const router = useRouter();
   const { closeLoginModal, openRegisterModal, isLoginModalOpen } =
     useContext(UiContext);
 
@@ -34,7 +36,11 @@ export const LoginModal = () => {
     if (!email || !password) return;
     if (!email.includes("@")) return;
 
-    await loginUser(email, password);
+    const ok = await loginUser(email, password);
+    if(ok) { 
+      closeLoginModal();
+      router.push('/');
+    }
   };
 
   return (
