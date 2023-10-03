@@ -1,8 +1,9 @@
 "use client"
+import { Tweet } from '@/interfaces';
 import { createContext } from 'react';
 
 interface TweetsContextProps {
-    tweets: string[];
+    tweets: Tweet[]; 
 }
 
 

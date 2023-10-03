@@ -1,7 +1,7 @@
 import { type UUID } from "crypto";
 import { User } from ".";
 
-export interface Tweets { 
+export interface Tweet { 
     id: UUID;
     content: string; 
     user: User; 
@@ -10,6 +10,7 @@ export interface Tweets {
     updatedAt: Date;
     retweets: number;
     comments: Comment[];
+    userId: UUID;
 }
 
 export interface Comment { 
@@ -20,5 +21,5 @@ export interface Comment {
     createdAt: Date;
     updatedAt: Date;
     retweets: number;
-    tweet: Tweets;
+    tweet: Tweet;
 }

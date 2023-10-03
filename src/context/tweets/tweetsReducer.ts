@@ -1,6 +1,7 @@
+import { Tweet } from "@/interfaces";
 import { TweetsState } from ".";
 
-type TweetsActionType = { type: "[Tweets] - load-tweets"; payload: [] };
+type TweetsActionType = { type: "[Tweets] - load-tweets"; payload: Tweet[] };
 
 export const tweetsReducer = (
   state: TweetsState,

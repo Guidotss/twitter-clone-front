@@ -4,7 +4,7 @@ import { signInWithGithub, signInWithGoogle } from "@/firebase";
 import { toast } from "react-hot-toast";
 import Cookies from "js-cookie";
 import { AuthContext, authReducer } from ".";
-import { User } from "@/interfaces";
+import { AuthResponse, User } from "@/interfaces";
 
 interface AuthProviderProps {
   children: React.ReactNode;
@@ -45,13 +45,13 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
           },
         }
       );
-      const data = await response.json();
+      const data: AuthResponse = await response.json();
       if (data.ok) {
         dispatch({
           type: "[AUTH] - login",
-          payload: data.user,
+          payload: data.user!,
         });
-        Cookies.set("token", data.token);
+        Cookies.set("token", data.token!);
         return;
       }
     } catch (error) {
@@ -75,13 +75,13 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
           body: JSON.stringify({ email, password }),
         }
       );
-      const data = await response.json();
+      const data: AuthResponse = await response.json();
       if (data.ok) {
         dispatch({
           type: "[AUTH] - login",
-          payload: data.user,
+          payload: data.user!,
         });
-        Cookies.set("token", data.token);
+        Cookies.set("token", data.token!);
         return true;
       }
       toast.error("Invalid credentials", {
@@ -101,7 +101,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
           background: "#333",
           color: "#fff",
         },
-        icon: "❌",
+        icon: "⚠️",
       });
       return false;
     }
@@ -129,16 +129,16 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
           body: JSON.stringify(user),
         }
       );
-      const data = await response.json();
+      const data: AuthResponse = await response.json();
       if (data.ok) {
         dispatch({
           type: "[AUTH] - login",
-          payload: data.user,
+          payload: data.user!,
         });
-        Cookies.set("token", data.token);
+        Cookies.set("token", data.token!);
         return true;
       }
-      toast.error(data.error, {
+      toast.error(data.error!, {
         duration: 4000,
         style: {
           background: "#333",
@@ -155,7 +155,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
           background: "#333",
           color: "#fff",
         },
-        icon: "❌",
+        icon: "⚠️",
       });
       return false;
     }
@@ -179,12 +179,12 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
             }),
           }
         );
-        const data = await response.json();
+        const data: AuthResponse = await response.json();
         dispatch({
           type: "[AUTH] - login",
-          payload: data.user,
+          payload: data.user!,
         });
-        Cookies.set("token", data.token);
+        Cookies.set("token", data.token!);
       }
     } catch (error) {
       console.log(error);
@@ -213,12 +213,12 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
             }),
           }
         );
-        const data = await response.json();
+        const data: AuthResponse = await response.json();
         dispatch({
           type: "[AUTH] - login",
-          payload: data.user,
+          payload: data.user!,
         });
-        Cookies.set("token", data.token);
+        Cookies.set("token", data.token!);
       }
     } catch (error) {
       console.log(error);

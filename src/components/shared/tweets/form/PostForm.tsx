@@ -1,13 +1,15 @@
 "use client";
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { GifIcon, ImageIcon } from "../..";
+import { TweetsContext } from "@/context";
 
 export const PostForm = () => {
   const [content, setContent] = useState<string>("");
+  const { tweets } = useContext(TweetsContext);
+  console.log(tweets);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(content);
   };
 
   return (
