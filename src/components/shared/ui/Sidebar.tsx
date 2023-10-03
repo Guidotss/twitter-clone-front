@@ -39,7 +39,7 @@ export const Sidebar = () => {
         {sidebarItems.map((item, index) => (
           <li
             key={item.name}
-            className={`flex items-center justify-start text-2xl ${
+            className={`flex items-center justify-start text-xl ${
               sidebarItems[index].isSelected ? "font-semibold" : "font-light"
             } cursor-pointer`}
             onClick={() => handleSidebarItem(index)}
