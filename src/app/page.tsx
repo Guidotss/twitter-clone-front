@@ -15,6 +15,9 @@ export default function Home() {
         <section className="flex flex-col  border-b-[1px] border-gray-600">
           <PostForm />
         </section>
+        <section>
+          
+        </section>
       </div>
       <div className="col-span-1">
         <h1 className="text-4xl font-bold">Home</h1>

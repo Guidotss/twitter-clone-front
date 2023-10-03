@@ -11,20 +11,25 @@ interface TweetsProviderProps {
 
 export interface TweetsState {
   tweets: Tweet[];
+  isLoading: boolean;
 }
 
 const TWEETS_INITIAL_STATE: TweetsState = {
   tweets: [],
+  isLoading: false,
 };
 
 export const TweetsProvider: FC<TweetsProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(tweetsReducer, TWEETS_INITIAL_STATE);
 
-  useEffect(() => { 
+  useEffect(() => {
     loadTweets();
-  },[]); 
+  }, []);
 
   const loadTweets = async () => {
+    dispatch({
+      type: "[Tweets] - loading",
+    });
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/tweets`,
