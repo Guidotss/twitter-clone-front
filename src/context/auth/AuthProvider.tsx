@@ -54,8 +54,10 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         Cookies.set("token", data.token!);
         return;
       }
+      Cookies.remove("token");
     } catch (error) {
       console.log(error);
+      Cookies.remove("token");
       dispatch({
         type: "[AUTH] - logout",
       });

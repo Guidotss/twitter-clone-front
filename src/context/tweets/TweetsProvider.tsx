@@ -3,7 +3,7 @@ import { FC, useEffect, useReducer } from "react";
 import { toast } from "react-hot-toast";
 import { TweetsContext, tweetsReducer } from ".";
 import { Tweet } from "@/interfaces";
-import { TweetsResponse } from "../auth/TweetsResponse";
+import { TweetsResponse } from "@/interfaces";
 
 interface TweetsProviderProps {
   children: React.ReactNode;
@@ -45,7 +45,7 @@ export const TweetsProvider: FC<TweetsProviderProps> = ({ children }) => {
       if (data.ok) {
         dispatch({
           type: "[Tweets] - load-tweets",
-          payload: data.tweets!,
+          payload: data.results!,
         });
         return;
       }

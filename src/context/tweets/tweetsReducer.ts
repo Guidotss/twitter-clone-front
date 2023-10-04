@@ -1,9 +1,9 @@
-import { Tweet } from "@/interfaces";
+import { Results, Tweet } from "@/interfaces";
 import { TweetsState } from ".";
 
 type TweetsActionType =
   | { type: "[Tweets] - loading" }
-  | { type: "[Tweets] - load-tweets"; payload: Tweet[] }
+  | { type: "[Tweets] - load-tweets"; payload: Results[] }
   | { type: "[Tweets] - create-tweet"; payload: Tweet };
 
 export const tweetsReducer = (
@@ -20,7 +20,7 @@ export const tweetsReducer = (
       return {
         ...state,
         isLoading: false,
-        tweets: action.payload,
+        tweets: action.payload.map((result) => result.tweets).flat(),
       };
     case "[Tweets] - create-tweet":
       return {

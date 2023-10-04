@@ -10,12 +10,10 @@ export const PostForm = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    createTweet({ 
-      userId: user?.id!,
-      content
-    });
-    setContent("");
-    console.log(tweets);
+    
+
+    
+    console.log(user);
   };
 
   return (
