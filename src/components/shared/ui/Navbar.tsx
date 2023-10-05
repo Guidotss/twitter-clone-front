@@ -54,16 +54,17 @@ export const Navbar = () => {
     <nav className="flex items-center justify-center w-full mt-10">
       <ul className="flex justify-around w-full">
         {navbarItem.map((item, index) => (
-          <NavbarItem
-            key={item.name}
-            name={item.name}
-            styles={
-              item.isSelected
-                ? "font-semibold border-b-4 border-b-twitter rounded-sm py-1 px-3"
-                : "text-gray-500 py-1 px-3"
-            }
-            setActive={handleNavbarItem}
-          />
+          <div key={item.name} className="hover:bg-gray-700 2xl:px-[92px] hover:bg-opacity-30 transition-colors duration-300 ease-in-out">
+            <NavbarItem
+              name={item.name}
+              styles={
+                item.isSelected
+                  ? "font-semibold border-b-4 border-b-twitter rounded-sm py-1 px-3"
+                  : "text-gray-500 py-1 px-3"
+              }
+              setActive={handleNavbarItem}
+            />
+          </div>
         ))}
       </ul>
     </nav>

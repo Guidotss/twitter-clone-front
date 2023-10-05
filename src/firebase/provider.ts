@@ -16,6 +16,7 @@ export const signInWithGoogle = async () => {
     return {
       ok: true,
       user: {
+        id: uid,
         name: displayName,
         email,
         photoURL,

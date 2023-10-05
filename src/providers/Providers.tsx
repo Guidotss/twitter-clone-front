@@ -1,6 +1,5 @@
 "use client";
-
-import { AuthProvider, UiProvider } from "@/context";
+import { AuthProvider, TweetsProvider, UiProvider } from "@/context";
 
 interface ProviderProps {
   children: React.ReactNode;
@@ -9,7 +8,9 @@ interface ProviderProps {
 export const Providers = ({ children }: ProviderProps) => {
   return (
     <UiProvider>
-      <AuthProvider>{children}</AuthProvider>
+      <AuthProvider>
+        <TweetsProvider>{children}</TweetsProvider>
+      </AuthProvider>
     </UiProvider>
   );
 };
