@@ -8,6 +8,11 @@ export const TweetsList = () => {
   
   return (
     <div className="flex flex-col w-full items-center mt-10">
+      {tweetsData.map(({ tweet }) => ( 
+        <div key={tweet?.id}>
+          <span>{tweet?.content}</span>
+        </div>
+      ))}
     </div>
   );
 };

@@ -1,19 +1,14 @@
-import { Tweet } from "@/interfaces";
-import { UUID } from "crypto";
+import { Tweet, User } from "@/interfaces";
 
-export interface TweetsResponse {
+export interface TweetResponse {
   ok: boolean;
   message?: string;
   error?: string;
-  results?: TweetData[];
-  tweet?: TweetData;
+  results: TweetData[] | TweetData;
 }
 
 export interface TweetData {
-  user: {
-    id: UUID;
-    name: string;
-    imageUrl: string;
-  };
-  tweets: Tweet[];
+  user: User;
+  tweets?: Tweet[]; 
+  tweet?: Tweet;
 }

@@ -1,6 +1,5 @@
-import { TweetData, Tweet } from "@/interfaces";
+import { TweetData, Tweet, User } from "@/interfaces";
 import { TweetsState } from ".";
-
 
 type TweetsActionType =
   | { type: "[Tweets] - loading" }
@@ -21,7 +20,7 @@ export const tweetsReducer = (
       return {
         ...state,
         isLoading: false,
-        tweetsData: action.payload
+        tweetsData: action.payload,
       };
     case "[Tweets] - create-tweet":
       return {

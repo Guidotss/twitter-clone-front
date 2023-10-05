@@ -3,7 +3,7 @@ import { FC, useEffect, useReducer } from "react";
 import { toast } from "react-hot-toast";
 import { TweetsContext, tweetsReducer } from ".";
 import { TweetData, Tweet, User } from "@/interfaces";
-import { TweetsResponse } from "@/interfaces";
+import { TweetResponse } from "@/interfaces";
 
 interface TweetsProviderProps {
   children: React.ReactNode;
@@ -40,12 +40,12 @@ export const TweetsProvider: FC<TweetsProviderProps> = ({ children }) => {
           },
         }
       );
-      const data: TweetsResponse = await response.json();
+      const data: TweetResponse = await response.json();
 
       if (data.ok) {
         dispatch({
           type: "[Tweets] - load-tweets",
-          payload: data.results!,
+          payload: data.results! as TweetData[],
         });
         return;
       }
@@ -54,12 +54,7 @@ export const TweetsProvider: FC<TweetsProviderProps> = ({ children }) => {
     }
   };
 
-  const createTweet = async (user: User, content: string) => {
-    const newTweet = {
-      user,
-      content,
-    };
-
+  const createTweet = async (userId: string, content: string) => {
     try {
       dispatch({ type: "[Tweets] - loading" });
       const response = await fetch(
@@ -69,19 +64,15 @@ export const TweetsProvider: FC<TweetsProviderProps> = ({ children }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ userId: user.id, newTweet }),
+          body: JSON.stringify({ userId, content }),
         }
       );
-      const data: TweetsResponse = await response.json();
+      const data: TweetResponse = await response.json();
 
       if (data.ok) {
-        const newTweet = {
-          user: {},
-          tweet: data.tweet,
-        };
         dispatch({
           type: "[Tweets] - create-tweet",
-          payload: data.tweet!,
+          payload: data.results as TweetData,
         });
         return;
       }

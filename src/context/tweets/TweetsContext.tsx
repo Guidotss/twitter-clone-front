@@ -4,7 +4,7 @@ import { createContext } from "react";
 
 interface TweetsContextProps {
   isLoading: boolean;
-  createTweet: (user: User, content: string ) => Promise<void>;
+  createTweet: (userId: string, content: string ) => Promise<void>;
 
   tweetsData: TweetData[];
 }
