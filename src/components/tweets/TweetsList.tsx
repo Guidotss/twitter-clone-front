@@ -4,14 +4,10 @@ import { TweetsContext } from "@/context";
 import { useContext } from "react";
 
 export const TweetsList = () => {
-  const { tweets } = useContext(TweetsContext);
+  const { tweetsData } = useContext(TweetsContext);
+  
   return (
-    <div>
-      {tweets.map((tweet) => (
-        <div key={tweet.id}>
-          <h3>{tweet.content}</h3>
-        </div>
-      ))}
+    <div className="flex flex-col w-full items-center mt-10">
     </div>
   );
 };

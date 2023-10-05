@@ -3,7 +3,6 @@ import { User } from ".";
 
 export interface Tweet {
   id: UUID;
-  userId: UUID;
   content: string;
   likes: number;
   createdAt: Date;

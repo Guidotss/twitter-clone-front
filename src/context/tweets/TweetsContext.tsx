@@ -1,18 +1,12 @@
 "use client";
-import { Tweet } from "@/interfaces";
+import { TweetData, Tweet, User } from "@/interfaces";
 import { createContext } from "react";
 
 interface TweetsContextProps {
   isLoading: boolean;
-  createTweet: ({
-    userId,
-    content,
-  }: {
-    userId: string;
-    content: string;
-  }) => Promise<void>;
+  createTweet: (user: User, content: string ) => Promise<void>;
 
-  tweets: Tweet[];
+  tweetsData: TweetData[];
 }
 
 export const TweetsContext = createContext({} as TweetsContextProps);

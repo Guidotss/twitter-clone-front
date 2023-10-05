@@ -4,5 +4,5 @@ export interface User {
   id?: UUID;
   name: string;
   email: string;
-  photoUrl?: string;
+  imageUrl: string;
 }

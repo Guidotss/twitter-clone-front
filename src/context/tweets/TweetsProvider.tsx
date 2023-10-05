@@ -2,7 +2,7 @@
 import { FC, useEffect, useReducer } from "react";
 import { toast } from "react-hot-toast";
 import { TweetsContext, tweetsReducer } from ".";
-import { Tweet } from "@/interfaces";
+import { TweetData, Tweet, User } from "@/interfaces";
 import { TweetsResponse } from "@/interfaces";
 
 interface TweetsProviderProps {
@@ -10,12 +10,12 @@ interface TweetsProviderProps {
 }
 
 export interface TweetsState {
-  tweets: Tweet[];
+  tweetsData: TweetData[];
   isLoading: boolean;
 }
 
 const TWEETS_INITIAL_STATE: TweetsState = {
-  tweets: [],
+  tweetsData: [],
   isLoading: false,
 };
 
@@ -54,15 +54,9 @@ export const TweetsProvider: FC<TweetsProviderProps> = ({ children }) => {
     }
   };
 
-  const createTweet = async ({
-    userId,
-    content,
-  }: {
-    userId: string;
-    content: string;
-  }) => {
+  const createTweet = async (user: User, content: string) => {
     const newTweet = {
-      userId,
+      user,
       content,
     };
 
@@ -75,12 +69,16 @@ export const TweetsProvider: FC<TweetsProviderProps> = ({ children }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(newTweet),
+          body: JSON.stringify({ userId: user.id, newTweet }),
         }
       );
       const data: TweetsResponse = await response.json();
 
       if (data.ok) {
+        const newTweet = {
+          user: {},
+          tweet: data.tweet,
+        };
         dispatch({
           type: "[Tweets] - create-tweet",
           payload: data.tweet!,

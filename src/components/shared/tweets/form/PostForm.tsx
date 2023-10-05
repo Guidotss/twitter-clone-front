@@ -5,16 +5,15 @@ import { AuthContext, TweetsContext } from "@/context";
 
 export const PostForm = () => {
   const [content, setContent] = useState<string>("");
-  const { tweets,createTweet } = useContext(TweetsContext);
+  const { createTweet } = useContext(TweetsContext);
   const { user } = useContext(AuthContext);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    
-
-    
-    console.log(user);
+    createTweet(user!,content); 
+    setContent(""); 
   };
+  
 
   return (
     <>
