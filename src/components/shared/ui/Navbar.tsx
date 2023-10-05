@@ -59,7 +59,7 @@ export const Navbar = () => {
               name={item.name}
               styles={
                 item.isSelected
-                  ? "font-semibold border-b-4 border-b-twitter rounded-sm py-1 px-3"
+                  ? "font-semibold border-b-4 border-b-twitter rounded-sm py-1 px-2"
                   : "text-gray-500 py-1 px-3"
               }
               setActive={handleNavbarItem}

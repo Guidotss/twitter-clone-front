@@ -35,7 +35,7 @@ export const Sidebar = () => {
       <figure>
         <TwitterIcon width="50px" height="40px" />
       </figure>
-      <ul className="ml-4 mt-5 flex flex-col gap-7">
+      <ul className="ml-4 mt-5 flex flex-col gap-8">
         {sidebarItems.map((item, index) => (
           <li
             key={item.name}
@@ -48,6 +48,7 @@ export const Sidebar = () => {
             <span className="mt-1">{item.name}</span>
           </li>
         ))}
+        <button className="bg-twitter rounded-full w-56 py-4 text-lg font-bold hover:bg-opacity-90 transition-colors duration-300 ease-in-out">Postear</button>
       </ul>
     </aside>
   );

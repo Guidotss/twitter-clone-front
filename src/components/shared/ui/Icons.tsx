@@ -1,7 +1,6 @@
 interface IconProps {
   height?: string;
   width?: string;
-  fill?: string;
 }
 
 export const TwitterIcon = ({ height, width }: IconProps) => (
@@ -72,7 +71,7 @@ export const LeftArrowIcon = () => (
   </svg>
 );
 
-export const HomeIcon = ({ width, height, fill }: IconProps) => (
+export const HomeIcon = ({ width, height }: IconProps) => (
   <svg
     viewBox="0 0 24 24"
     aria-hidden="true"
@@ -86,11 +85,11 @@ export const HomeIcon = ({ width, height, fill }: IconProps) => (
   </svg>
 );
 
-export const ExploreIcon = ({ width, height, fill }: IconProps) => (
+export const ExploreIcon = ({ width, height }: IconProps) => (
   <svg
     viewBox="0 0 24 24"
     aria-hidden="true"
-    fill="#E5E7EB"
+    fill={"#E5E7EB"}
     width={width || "20px"}
     height={height || "20px"}
   >
@@ -100,7 +99,7 @@ export const ExploreIcon = ({ width, height, fill }: IconProps) => (
   </svg>
 );
 
-export const MessageIcon = ({ width, height, fill }: IconProps) => (
+export const MessageIcon = ({ width, height }: IconProps) => (
   <svg
     viewBox="0 0 24 24"
     aria-hidden="true"
@@ -114,7 +113,7 @@ export const MessageIcon = ({ width, height, fill }: IconProps) => (
   </svg>
 );
 
-export const ProfileIcon = ({ width, height, fill }: IconProps) => (
+export const ProfileIcon = ({ width, height }: IconProps) => (
   <svg
     viewBox="0 0 24 24"
     aria-hidden="true"
@@ -128,7 +127,7 @@ export const ProfileIcon = ({ width, height, fill }: IconProps) => (
   </svg>
 );
 
-export const ImageIcon = ({ width, height, fill }: IconProps) => (
+export const ImageIcon = ({ width, height }: IconProps) => (
   <svg
     viewBox="0 0 24 24"
     aria-hidden="true"
@@ -142,7 +141,7 @@ export const ImageIcon = ({ width, height, fill }: IconProps) => (
   </svg>
 );
 
-export const GifIcon = ({ width, height, fill }: IconProps) => (
+export const GifIcon = ({ width, height }: IconProps) => (
   <svg
     viewBox="0 0 24 24"
     aria-hidden="true"
@@ -152,6 +151,109 @@ export const GifIcon = ({ width, height, fill }: IconProps) => (
   >
     <g>
       <path d="M3 5.5C3 4.119 4.12 3 5.5 3h13C19.88 3 21 4.119 21 5.5v13c0 1.381-1.12 2.5-2.5 2.5h-13C4.12 21 3 19.881 3 18.5v-13zM5.5 5c-.28 0-.5.224-.5.5v13c0 .276.22.5.5.5h13c.28 0 .5-.224.5-.5v-13c0-.276-.22-.5-.5-.5h-13zM18 10.711V9.25h-3.74v5.5h1.44v-1.719h1.7V11.57h-1.7v-.859H18zM11.79 9.25h1.44v5.5h-1.44v-5.5zm-3.07 1.375c.34 0 .77.172 1.02.43l1.03-.86c-.51-.601-1.28-.945-2.05-.945C7.19 9.25 6 10.453 6 12s1.19 2.75 2.72 2.75c.85 0 1.54-.344 2.05-.945v-2.149H8.38v1.032H9.4v.515c-.17.086-.42.172-.68.172-.76 0-1.36-.602-1.36-1.375 0-.688.6-1.375 1.36-1.375z"></path>
+    </g>
+  </svg>
+);
+
+export const MoreOptionsIcon = ({ width, height }: IconProps) => (
+  <svg
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+    width={width || "20px"}
+    height={height || "20px"}
+    className="fill-gray-700 hover:fill-twitter transition-colors duration-300 ease-in-out"
+  >
+    <g>
+      <path d="M3 12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9 2c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm7 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"></path>
+    </g>
+  </svg>
+);
+
+export const CommentIcon = ({ width, height }: IconProps) => (
+  <svg
+    className="fill-gray-700 hover:fill-twitter transition-colors duration-300 ease-in-out"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+    width={width || "20px"}
+    height={height || "20px"}
+  >
+    <g>
+      <path d="M1.751 10c0-4.42 3.584-8 8.005-8h4.366c4.49 0 8.129 3.64 8.129 8.13 0 2.96-1.607 5.68-4.196 7.11l-8.054 4.46v-3.69h-.067c-4.49.1-8.183-3.51-8.183-8.01zm8.005-6c-3.317 0-6.005 2.69-6.005 6 0 3.37 2.77 6.08 6.138 6.01l.351-.01h1.761v2.3l5.087-2.81c1.951-1.08 3.163-3.13 3.163-5.36 0-3.39-2.744-6.13-6.129-6.13H9.756z"></path>
+    </g>
+  </svg>
+);
+
+export const RePostIcon = ({ width, height }: IconProps) => (
+  <svg
+    className="fill-gray-700 hover:fill-green-500 transition-colors duration-300 ease-in-out"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+    width={width || "20px"}
+    height={height || "20px"}
+  >
+    <g>
+      <path d="M4.5 3.88l4.432 4.14-1.364 1.46L5.5 7.55V16c0 1.1.896 2 2 2H13v2H7.5c-2.209 0-4-1.79-4-4V7.55L1.432 9.48.068 8.02 4.5 3.88zM16.5 6H11V4h5.5c2.209 0 4 1.79 4 4v8.45l2.068-1.93 1.364 1.46-4.432 4.14-4.432-4.14 1.364-1.46 2.068 1.93V8c0-1.1-.896-2-2-2z"></path>
+    </g>
+  </svg>
+);
+
+export const LikeIcon = ({ width, height }: IconProps) => (
+  <svg
+    className="fill-gray-700 hover:fill-red-500 transition-colors duration-300 ease-in-out"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+    width={width || "20px"}
+    height={height || "20px"}
+  >
+    <g>
+      <path d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.805 1.09-.806-1.09C9.984 6.01 8.526 5.44 7.304 5.5c-1.243.07-2.349.78-2.91 1.91-.552 1.12-.633 2.78.479 4.82 1.074 1.97 3.257 4.27 7.129 6.61 3.87-2.34 6.052-4.64 7.126-6.61 1.111-2.04 1.03-3.7.477-4.82-.561-1.13-1.666-1.84-2.908-1.91zm4.187 7.69c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z"></path>
+    </g>
+  </svg>
+);
+
+export const LoaderIcon = ({ width, height }: IconProps) => (
+  <svg
+    width="38"
+    height="38"
+    viewBox="0 0 38 38"
+    xmlns="http://www.w3.org/2000/svg"
+    className="fill-twitter"
+  >
+    <defs>
+      <linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">
+        <stop stop-color="#fff" stop-opacity="0" offset="0%" />
+        <stop stop-color="#fff" stop-opacity=".631" offset="63.146%" />
+        <stop stop-color="#fff" offset="100%" />
+      </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+      <g transform="translate(1 1)">
+        <path
+          d="M36 18c0-9.94-8.06-18-18-18"
+          id="Oval-2"
+          stroke="url(#a)"
+          stroke-width="2"
+        >
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="0 18 18"
+            to="360 18 18"
+            dur="0.9s"
+            repeatCount="indefinite"
+          />
+        </path>
+        <circle fill="#fff" cx="36" cy="18" r="1">
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="0 18 18"
+            to="360 18 18"
+            dur="0.9s"
+            repeatCount="indefinite"
+          />
+        </circle>
+      </g>
     </g>
   </svg>
 );

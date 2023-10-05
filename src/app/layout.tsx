@@ -27,7 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} 2xl:overflow-x-hidden`}>
+      <body className={`${inter.className} 2xl:overflow-x-hidden h-screen`}>
         <Toaster position="top-center" reverseOrder={false} />
         <Providers>{children}</Providers>
       </body>

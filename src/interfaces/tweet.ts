@@ -4,10 +4,10 @@ import { User } from ".";
 export interface Tweet {
   id: UUID;
   content: string;
-  likes: number;
+  likes: User[];
   createdAt: Date;
   updatedAt: Date;
-  retweets: number;
+  retweets: Tweet[];
   comments: Comment[];
 }
 
