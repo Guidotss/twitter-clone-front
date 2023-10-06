@@ -231,6 +231,13 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+  const logout = () => {
+    Cookies.remove("token");
+    dispatch({
+      type: "[AUTH] - logout",
+    });
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -240,6 +247,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         startLoginWithGithub,
         registerUser,
         loginUser,
+        logout,
       }}
     >
       {children}

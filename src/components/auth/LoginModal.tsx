@@ -72,6 +72,7 @@ export const LoginModal = () => {
                 <FormInput
                   field={email}
                   name="email"
+                  type="email"
                   setForm={setForm}
                   errorMessage="Correo no valido"
                   placeholder="Correo"
@@ -80,6 +81,7 @@ export const LoginModal = () => {
                 />
                 <FormInput
                   field={password}
+                  type="password"
                   name="password"
                   setForm={setForm}
                   errorMessage="Contraseña no valida"

@@ -48,6 +48,7 @@ export const RegisterForm = ({ currentStep, setStep }: RegisterFormProps) => {
         <>
           <FormInput
             field={name}
+            type="text"
             name="name"
             placeholder="Nombre"
             setForm={setForm}
@@ -56,6 +57,7 @@ export const RegisterForm = ({ currentStep, setStep }: RegisterFormProps) => {
           />
           <FormInput
             field={email}
+            type="email"
             name="email"
             placeholder="Correo electrónico"
             setForm={setForm}

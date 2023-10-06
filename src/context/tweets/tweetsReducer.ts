@@ -17,7 +17,6 @@ export const tweetsReducer = (
         isLoading: true,
       };
     case "[Tweets] - load-tweets":
-      console.log(action.payload);
       return {
         ...state,
         isLoading: false,

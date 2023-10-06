@@ -4,7 +4,9 @@ type UiActionType =
   | { type: "[UI] open-register-modal" }
   | { type: "[UI] close-register-modal" }
   | { type: "[UI] open-login-modal" }
-  | { type: "[UI] close-login-modal" };
+  | { type: "[UI] close-login-modal" }
+  | { type: "[UI] open-logout-modal" }
+  | { type: "[UI] close-logout-modal" };
 
 export const uiReducer = (state: UiState, action: UiActionType): UiState => {
   switch (action.type) {
@@ -28,6 +30,18 @@ export const uiReducer = (state: UiState, action: UiActionType): UiState => {
       return {
         ...state,
         isLoginModalOpen: false,
+      };
+
+    case "[UI] open-logout-modal":
+      return {
+        ...state,
+        isLogoutModalOpen: true,
+      };
+
+    case "[UI] close-logout-modal":
+      return {
+        ...state,
+        isLogoutModalOpen: false,
       };
 
     default:

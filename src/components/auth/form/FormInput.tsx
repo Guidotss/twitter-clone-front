@@ -7,6 +7,7 @@ interface InputProps {
   errorMessage: string;
   style?: string;
   isInLoginModal?: boolean;
+  type: string;
   setForm: React.Dispatch<React.SetStateAction<any>>;
 }
 
@@ -45,6 +46,7 @@ export const FormInput = ({
   errorMessage,
   style,
   isInLoginModal,
+  type,
   setForm,
 }: InputProps) => {
   return (
@@ -62,7 +64,7 @@ export const FormInput = ({
             }`}
         placeholder={placeholder}
         name={name}
-        type={name === "email" ? "email" : "text"}
+        type={type}
         value={field}
         maxLength={50}
         onChange={(e) =>

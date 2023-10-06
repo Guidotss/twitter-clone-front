@@ -9,11 +9,13 @@ interface UiProviderProps {
 export interface UiState {
   isRegisterModalOpen: boolean;
   isLoginModalOpen: boolean;
+  isLogoutModalOpen: boolean;
 }
 
 const UI_INITIAL_STATE: UiState = {
   isRegisterModalOpen: false,
   isLoginModalOpen: false,
+  isLogoutModalOpen: false,
 };
 
 export const UiProvider: FC<UiProviderProps> = ({ children }) => {
@@ -27,6 +29,9 @@ export const UiProvider: FC<UiProviderProps> = ({ children }) => {
   const openLoginModal = () => dispatch({ type: "[UI] open-login-modal" });
   const closeLoginModal = () => dispatch({ type: "[UI] close-login-modal" });
 
+  const openLogoutModal = () => dispatch({ type: "[UI] open-logout-modal" });
+  const closeLogoutModal = () => dispatch({ type: "[UI] close-logout-modal" });
+
   return (
     <UiContext.Provider
       value={{
@@ -36,6 +41,8 @@ export const UiProvider: FC<UiProviderProps> = ({ children }) => {
         closeRegisterModal,
         openLoginModal,
         closeLoginModal,
+        openLogoutModal,
+        closeLogoutModal,
       }}
     >
       {children}

@@ -1,5 +1,5 @@
 "use client";
-import { use, useContext } from "react";
+import { useContext } from "react";
 import { GitHubIcon, GoogleIcon } from "../shared";
 import { AuthContext } from "@/context/auth";
 import { UiContext } from "@/context/ui";
@@ -32,9 +32,7 @@ export const RegisterMethods = ({
             className="bg-white px-12 py-[6px] rounded-full flex gap-x-4 items-center focus:outline-none"
             onClick={handleLoginWithGoogle}
           >
-            <figure>
-              <GoogleIcon />
-            </figure>
+            <GoogleIcon />
             <span className="text-gray-600 font-semibold text-sm">
               Registrarse con google
             </span>
@@ -45,9 +43,9 @@ export const RegisterMethods = ({
             className="bg-white px-12 py-[6px] rounded-full flex gap-x-4 items-center focus:outline-none"
             onClick={handleLoginWithGithub}
           >
-            <figure>
-              <GitHubIcon />
-            </figure>
+          
+            <GitHubIcon />
+          
             <span className="text-gray-600 font-semibold text-sm">
               Registrarse con github
             </span>
