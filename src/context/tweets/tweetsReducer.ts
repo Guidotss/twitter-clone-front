@@ -25,6 +25,7 @@ export const tweetsReducer = (
     case "[Tweets] - create-tweet":
       return {
         ...state,
+        isLoading: false,
         tweetsData: [action.payload, ...state.tweetsData],
       };
     default:
