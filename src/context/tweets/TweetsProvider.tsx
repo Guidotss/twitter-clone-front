@@ -11,11 +11,13 @@ interface TweetsProviderProps {
 
 export interface TweetsState {
   tweetsData: TweetData[];
+  currentTweet?: TweetData;
   isLoading: boolean;
 }
 
 const TWEETS_INITIAL_STATE: TweetsState = {
   tweetsData: [],
+  currentTweet: undefined,
   isLoading: false,
 };
 
@@ -90,12 +92,20 @@ export const TweetsProvider: FC<TweetsProviderProps> = ({ children }) => {
     }
   };
 
+  const setCurrentTweeet = (id: string) => {
+    dispatch({
+      type: "[Tweets] - set-current-tweet",
+      payload: id,
+    });
+  }
+
   return (
     <TweetsContext.Provider
       value={{
         ...state,
 
         createTweet,
+        setCurrentTweeet
       }}
     >
       {children}

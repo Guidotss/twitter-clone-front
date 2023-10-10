@@ -6,7 +6,9 @@ type UiActionType =
   | { type: "[UI] open-login-modal" }
   | { type: "[UI] close-login-modal" }
   | { type: "[UI] open-logout-modal" }
-  | { type: "[UI] close-logout-modal" };
+  | { type: "[UI] close-logout-modal" }
+  | { type: "[UI] open-comment-modal" }
+  | { type: "[UI] close-comment-modal" };
 
 export const uiReducer = (state: UiState, action: UiActionType): UiState => {
   switch (action.type) {
@@ -42,6 +44,18 @@ export const uiReducer = (state: UiState, action: UiActionType): UiState => {
       return {
         ...state,
         isLogoutModalOpen: false,
+      };
+
+    case "[UI] open-comment-modal":
+      return {
+        ...state,
+        isCommentModalOpen: true,
+      };
+
+    case "[UI] close-comment-modal":
+      return {
+        ...state,
+        isCommentModalOpen: false,
       };
 
     default:

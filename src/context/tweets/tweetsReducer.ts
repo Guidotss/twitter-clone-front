@@ -4,7 +4,8 @@ import { TweetsState } from ".";
 type TweetsActionType =
   | { type: "[Tweets] - loading" }
   | { type: "[Tweets] - load-tweets"; payload: TweetData[] }
-  | { type: "[Tweets] - create-tweet"; payload: TweetData };
+  | { type: "[Tweets] - create-tweet"; payload: TweetData }
+  | { type: "[Tweets] - set-current-tweet"; payload: string }
 
 export const tweetsReducer = (
   state: TweetsState,
@@ -28,6 +29,11 @@ export const tweetsReducer = (
         isLoading: false,
         tweetsData: [action.payload, ...state.tweetsData],
       };
+    case "[Tweets] - set-current-tweet": 
+      return { 
+        ...state,
+        currentTweet: state.tweetsData.find((tweet: TweetData) => tweet.tweet?.id === action.payload)
+      }
     default:
       return state;
   }
