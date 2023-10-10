@@ -2,10 +2,12 @@
 import { FormEvent, useContext, useState } from "react";
 import { GifIcon, ImageIcon } from "../..";
 import { AuthContext, TweetsContext } from "@/context";
+import Image from "next/image";
+import { MediaOptions } from "@/components/tweets/MediaOptions";
 
 export const PostForm = () => {
   const [content, setContent] = useState<string>("");
-  const { tweetsData,createTweet } = useContext(TweetsContext);
+  const { createTweet } = useContext(TweetsContext);
   const { user } = useContext(AuthContext);
 
   const handleSubmit = (e: FormEvent) => {
@@ -18,7 +20,19 @@ export const PostForm = () => {
     <>
       <div className="flex gap-5 items-center mt-4 h-24 px-5">
         <div className="flex items-center w-full">
-          <div className="w-10 h-10 bg-white rounded-full self-start" />
+          <figure className="-mt-6">
+            {!user?.imageUrl ? (
+              <div className="w-10 h-10 rounded-full animate-pulse bg-gray-500 bg-opacity-20" />
+            ) : (
+              <Image
+                src={`https://${user?.imageUrl}`}
+                alt="user profile picture"
+                width={50}
+                height={50}
+                className="rounded-full p-1"
+              />
+            )}
+          </figure>
           <textarea
             className="bg-transparent text-xl font-light focus:border-none focus:outline-none w-full px-3 resize-none text-gray-200"
             placeholder="¡¿Qué está pasando?!"
@@ -29,14 +43,7 @@ export const PostForm = () => {
         </div>
       </div>
       <div className="flex justify-between items-center mb-5 px-10">
-        <div className="flex gap-2 cursor-pointer">
-          <i className="flex hover:bg-twitter hover:bg-opacity-10 transition-colors duration-300 ease-in-out p-2 rounded-full">
-            <ImageIcon width="22px" height="22px" />
-          </i>
-          <i className="flex hover:bg-twitter hover:bg-opacity-10 transition-colors duration-300 ease-in-out p-2 rounded-full">
-            <GifIcon width="22px" height="22px" />
-          </i>
-        </div>
+        <MediaOptions/>
         <button
           className={`bg-twitter ${
             !content && "opacity-60"
