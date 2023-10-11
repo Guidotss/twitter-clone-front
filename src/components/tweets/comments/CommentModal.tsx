@@ -1,12 +1,10 @@
 "use client";
-import { CloseIcon } from "@/components";
-import { AuthContext, TweetsContext, UiContext } from "@/context";
-import Image from "next/image";
-
 import { useContext } from "react";
-import { TweetData } from "../TweetData";
-import Link from "next/link";
-import { MediaOptions } from "../MediaOptions";
+import { AuthContext, TweetsContext, UiContext } from "@/context";
+import { CloseIcon } from "@/components";
+import { CommentModalForm } from "./CommentModalForm";
+import { CommentModalTweetData } from "./CommentModalTweetData";
+
 export const CommentModal = () => {
   const { isCommentModalOpen, closeCommentModal } = useContext(UiContext);
   const { currentTweet } = useContext(TweetsContext);
@@ -28,57 +26,10 @@ export const CommentModal = () => {
             </span>
           </header>
           <section className="flex flex-col justify-center">
-            <div className="flex gap-2">
-              <figure>
-                <Image
-                  src={`https://${currentTweet?.user.imageUrl}`}
-                  alt="user profile picture"
-                  width={50}
-                  height={50}
-                  className="rounded-full p-1"
-                />
-              </figure>
-              <TweetData
-                tweet={currentTweet?.tweet!}
-                user={currentTweet?.user!}
-              />
-            </div>
-            <article className="ml-[60px]">
-              <p>{currentTweet?.tweet?.content}</p>
-              <div className="flex">
-                <span className="text-gray-500 text-[15px]">
-                  Respondiendo a{" "}
-                </span>
-                <Link
-                  href={`/profile/user_id`}
-                  className="text-twitter ml-2 text-[15px] cursor-pointer"
-                >
-                  @{currentTweet?.user?.email.split("@")[0]}
-                </Link>
-              </div>
-            </article>
-            <div className="w-[2px] h-20 bg-gray-700 ml-6 -mt-10" />
+            <CommentModalTweetData currentTweet={currentTweet!} />
           </section>
           <section className="flex flex-col justify-center ml-1">
-            <div className="flex gap-2">
-              <figure>
-                <Image
-                  src={`https://${user?.imageUrl}`}
-                  alt="user profile picture"
-                  width={50}
-                  height={50}
-                  className="rounded-full p-1"
-                />
-              </figure>
-              <textarea
-                className="w-full bg-transparent text-gray-300 text-xl outline-none resize-none mt-3"
-                placeholder="Postea tu respuesta"
-              />
-            </div>
-            <footer className="flex justify-between items-center mt-10">
-              <MediaOptions/>
-              <button className="bg-twitter px-5 py-2 rounded-full">Responder</button>
-            </footer>
+            <CommentModalForm user={user!} />
           </section>
         </div>
       </div>
