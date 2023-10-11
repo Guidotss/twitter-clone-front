@@ -97,7 +97,39 @@ export const TweetsProvider: FC<TweetsProviderProps> = ({ children }) => {
       type: "[Tweets] - set-current-tweet",
       payload: id,
     });
-  }
+  };
+
+  const createComment = async (
+    tweetId: string,
+    userId: string,
+    content: string
+  ) => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/tweets/comments/${tweetId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId, content }),
+        }
+      );
+      const data = await response.json();
+      if (data.ok) {
+        dispatch({
+          type: "[Tweets] - create-comment",
+          payload: {
+            tweet: state.currentTweet?.tweet!,
+            comment: data.comment,
+          },
+        });
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <TweetsContext.Provider
@@ -105,7 +137,8 @@ export const TweetsProvider: FC<TweetsProviderProps> = ({ children }) => {
         ...state,
 
         createTweet,
-        setCurrentTweeet
+        setCurrentTweeet,
+        createComment,
       }}
     >
       {children}

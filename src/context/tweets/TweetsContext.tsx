@@ -6,6 +6,7 @@ interface TweetsContextProps {
   isLoading: boolean;
   currentTweet?: TweetData; 
   createTweet: (userId: string, content: string ) => Promise<void>;
+  createComment(tweetId: string, userId: string, content: string): Promise<void>;
   setCurrentTweeet: (id: string) => void;
   tweetsData: TweetData[];
 }

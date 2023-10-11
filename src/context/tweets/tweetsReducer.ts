@@ -6,6 +6,10 @@ type TweetsActionType =
   | { type: "[Tweets] - load-tweets"; payload: TweetData[] }
   | { type: "[Tweets] - create-tweet"; payload: TweetData }
   | { type: "[Tweets] - set-current-tweet"; payload: string }
+  | {
+      type: "[Tweets] - create-comment";
+      payload: { tweet: Tweet; comment: Comment };
+    };
 
 export const tweetsReducer = (
   state: TweetsState,
@@ -29,11 +33,30 @@ export const tweetsReducer = (
         isLoading: false,
         tweetsData: [action.payload, ...state.tweetsData],
       };
-    case "[Tweets] - set-current-tweet": 
-      return { 
+    case "[Tweets] - set-current-tweet":
+      return {
         ...state,
-        currentTweet: state.tweetsData.find((tweet: TweetData) => tweet.tweet?.id === action.payload)
-      }
+        currentTweet: state.tweetsData.find(
+          (tweet: TweetData) => tweet.tweet?.id === action.payload
+        ),
+      };
+    case "[Tweets] - create-comment":
+      return {
+        ...state,
+        tweetsData: state.tweetsData.map((tweetData: any) => {
+          if (tweetData.tweet?.id === action.payload.tweet?.id) {
+            return {
+              ...tweetData,
+              tweet: {
+                ...tweetData.tweet,
+                comments: [...tweetData.tweet.comments, action.payload.comment],
+              },
+            };
+          } else {
+            return tweetData;
+          }
+        }),
+      };
     default:
       return state;
   }
