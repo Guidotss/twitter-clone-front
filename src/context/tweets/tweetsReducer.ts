@@ -1,4 +1,4 @@
-import { TweetData, Tweet, User } from "@/interfaces";
+import { TweetData, Tweet, User, Like } from "@/interfaces";
 import { TweetsState } from ".";
 
 type TweetsActionType =
@@ -9,6 +9,10 @@ type TweetsActionType =
   | {
       type: "[Tweets] - create-comment";
       payload: { tweet: Tweet; comment: Comment };
+    }
+  | {
+      type: "[Tweets] - set-like";
+      payload: { tweetId: string;userId: string, like: Like; isLiked: boolean };
     };
 
 export const tweetsReducer = (
@@ -43,7 +47,7 @@ export const tweetsReducer = (
     case "[Tweets] - create-comment":
       return {
         ...state,
-        tweetsData: state.tweetsData.map((tweetData: any) => {
+        tweetsData: state.tweetsData.map((tweetData: TweetData) => {
           if (tweetData.tweet?.id === action.payload.tweet?.id) {
             return {
               ...tweetData,
@@ -52,6 +56,35 @@ export const tweetsReducer = (
                 comments: [...tweetData.tweet.comments, action.payload.comment],
               },
             };
+          } else {
+            return tweetData;
+          }
+        }) as TweetData[],
+      };
+    case "[Tweets] - set-like":
+      return {
+        ...state,
+        tweetsData: state.tweetsData.map((tweetData: TweetData) => {
+          if (tweetData.tweet?.id === action.payload.tweetId) {
+            if (action.payload.isLiked) {
+              return {
+                ...tweetData,
+                tweet: {
+                  ...tweetData.tweet,
+                  likes: [...tweetData.tweet.likes, action.payload.like],
+                },
+              };
+            } else {
+              return {
+                ...tweetData,
+                tweet: {
+                  ...tweetData.tweet,
+                  likes: tweetData.tweet.likes.filter(
+                    (like: Like) => like.userId !== action.payload.userId
+                  ),
+                },
+              };
+            }
           } else {
             return tweetData;
           }

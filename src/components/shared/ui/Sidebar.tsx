@@ -63,7 +63,7 @@ export const Sidebar = () => {
             <span className="mt-1">{item.name}</span>
           </li>
         ))}
-        <button className="bg-twitter rounded-full w-56 py-4 text-lg font-bold hover:bg-opacity-90 transition-colors duration-300 ease-in-out">
+        <button className="bg-twitter rounded-full w-56 py-4 text-lg font-bold hover:bg-opacity-90 transition-colors duration-300 ease-in-out focus:outline-none">
           Postear
         </button>
       </ul>

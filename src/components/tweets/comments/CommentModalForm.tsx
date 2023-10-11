@@ -38,7 +38,7 @@ export const CommentModalForm = ({ user }: { user: User }) => {
       <footer className="flex justify-between items-center mt-10">
         <MediaOptions />
         <button
-          className={`bg-twitter px-5 py-2 rounded-full focus:outline-none hover:bg-opacity-90 transition duration-300 ease-in-out ${
+          className={`bg-twitter px-5 py-2 rounded-full focus:outline-none hover:bg-opacity-90 transition duration-300 ease-in-out text-white ${
             content.length == 0
               ? "opacity-50 cursor-not-allowed"
               : "opacity-100 cursor-pointer"

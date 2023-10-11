@@ -67,6 +67,7 @@ export const FormInput = ({
         type={type}
         value={field}
         maxLength={50}
+        autoComplete="on"
         onChange={(e) =>
           setForm((prev: RegisterForm | LoginForm) => ({
             ...prev,

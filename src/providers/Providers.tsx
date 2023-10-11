@@ -7,12 +7,12 @@ interface ProviderProps {
 
 export const Providers = ({ children }: ProviderProps) => {
   return (
-    <div className="">
-      <UiProvider>
-        <AuthProvider>
-          <TweetsProvider>{children}</TweetsProvider>
-        </AuthProvider>
-      </UiProvider>
-    </div>
+
+    <UiProvider>
+      <AuthProvider>
+        <TweetsProvider>{children}</TweetsProvider>
+      </AuthProvider>
+    </UiProvider>
+
   );
 };

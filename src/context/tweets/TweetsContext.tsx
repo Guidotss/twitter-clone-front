@@ -5,10 +5,12 @@ import { createContext } from "react";
 interface TweetsContextProps {
   isLoading: boolean;
   currentTweet?: TweetData; 
+  tweetsData: TweetData[];
+  
   createTweet: (userId: string, content: string ) => Promise<void>;
   createComment(tweetId: string, userId: string, content: string): Promise<void>;
+  setLike: (tweetId: string, userId: string) => Promise<void>;
   setCurrentTweeet: (id: string) => void;
-  tweetsData: TweetData[];
 }
 
 export const TweetsContext = createContext({} as TweetsContextProps);

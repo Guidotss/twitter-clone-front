@@ -13,7 +13,10 @@ export const CommentModal = () => {
   return (
     isCommentModalOpen && (
       <div className="fixed flex flex-col items-center  h-screen w-full bg-modal animate__animated animate__fadeIn animate__faster">
-        <div className="flex flex-col w-[30vw] min-h-[35vh] gap-5 bg-black rounded-xl mt-10 p-4">
+        <div 
+          className="flex flex-col w-[30vw] min-h-[35vh] gap-5 bg-black rounded-xl mt-10 p-4"
+          about="Comment Modal"
+        >
           <header className="flex items-center justify-between">
             <i
               className="w-9 hover:bg-gray-200 hover:bg-opacity-10 transition-colors duration-300 ease-in-out p-2 rounded-full"

@@ -3,7 +3,6 @@ import { FC, useEffect, useReducer } from "react";
 import { toast } from "react-hot-toast";
 import { TweetsContext, tweetsReducer } from ".";
 import { TweetData, Tweet, User } from "@/interfaces";
-import { TweetResponse } from "@/interfaces";
 
 interface TweetsProviderProps {
   children: React.ReactNode;
@@ -42,7 +41,7 @@ export const TweetsProvider: FC<TweetsProviderProps> = ({ children }) => {
           },
         }
       );
-      const data: TweetResponse = await response.json();
+      const data = await response.json();
 
       if (data.ok) {
         dispatch({
@@ -69,7 +68,7 @@ export const TweetsProvider: FC<TweetsProviderProps> = ({ children }) => {
           body: JSON.stringify({ userId, content }),
         }
       );
-      const data: TweetResponse = await response.json();
+      const data = await response.json();
 
       if (data.ok) {
         dispatch({
@@ -131,6 +130,37 @@ export const TweetsProvider: FC<TweetsProviderProps> = ({ children }) => {
     }
   };
 
+  const setLike = async (tweetId: string, userId: string) => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/tweets/likes/${tweetId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId }),
+        }
+      );
+      const data = await response.json();
+
+      if (data.ok) {
+        dispatch({
+          type: "[Tweets] - set-like",
+          payload: {
+            tweetId,
+            like: data.like,
+            isLiked: data.isLiked,
+            userId,
+          },
+        });
+      }
+      return;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <TweetsContext.Provider
       value={{
@@ -139,6 +169,7 @@ export const TweetsProvider: FC<TweetsProviderProps> = ({ children }) => {
         createTweet,
         setCurrentTweeet,
         createComment,
+        setLike,
       }}
     >
       {children}
