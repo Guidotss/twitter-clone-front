@@ -14,21 +14,26 @@ interface TweetCardProps {
 
 export const TweetCard = ({ tweet, user }: TweetCardProps) => {
   const { openCommentModal } = useContext(UiContext);
-  const { setCurrentTweeet, setLike } = useContext(TweetsContext);
-  const { user: currentUser } = useContext(AuthContext)
+  const { setCurrentTweeet, setLike, setRetweet } = useContext(TweetsContext);
+  const { user: currentUser } = useContext(AuthContext);
 
   const onSetCurrentTweet = () => {
     setCurrentTweeet(tweet.id);
     openCommentModal();
   };
-  console.log(tweet.likes)
 
   const handleLike = () => {
     setLike(tweet.id, currentUser?.id!);
   };
 
+  const handleRetweet = () => {
+    setRetweet(tweet.id, currentUser?.id!);
+  };
+
   const isLiked = tweet.likes.find((like) => like.userId === currentUser?.id);
-  console.log(isLiked);
+  const isRetweeted = tweet.retweets.find(
+    (retweet) => retweet.userId === currentUser?.id
+  );
 
   return (
     <div className="flex gap-3 px-5 py-2 hover:bg-gray-700 hover:bg-opacity-10 transition-colors duration-300 ease-in-out cursor-pointer">
@@ -60,9 +65,12 @@ export const TweetCard = ({ tweet, user }: TweetCardProps) => {
               </i>
               <span className="font-light">{tweet.comments.length}</span>
             </li>
-            <li className="flex items-center text-gray-700 hover:text-green-500 transition-colors duration-300 ease-in-out">
+            <li
+              className="flex items-center text-gray-700 hover:text-green-500 transition-colors duration-300 ease-in-out"
+              onClick={handleRetweet}
+            >
               <i className="hover:bg-green-500 hover:bg-opacity-10 transition-colors duration-300 ease-in-out p-2 rounded-full focus:outline-none">
-                <RePostIcon />
+                <RePostIcon  isRetweeted={!!isRetweeted}/>
               </i>
               <span className="font-light">{tweet.retweets.length}</span>
             </li>
@@ -71,9 +79,7 @@ export const TweetCard = ({ tweet, user }: TweetCardProps) => {
                 className="hover:bg-red-500 hover:bg-opacity-10 transition-colors duration-300 ease-in-out p-2 rounded-full focus:outline-none"
                 onClick={handleLike}
               >
-                <LikeIcon 
-                  isLiked={!!isLiked}
-                />
+                <LikeIcon isLiked={!!isLiked} />
               </i>
               <span className="font-light">{tweet.likes.length}</span>
             </li>

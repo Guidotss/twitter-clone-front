@@ -10,6 +10,7 @@ interface TweetsContextProps {
   createTweet: (userId: string, content: string ) => Promise<void>;
   createComment(tweetId: string, userId: string, content: string): Promise<void>;
   setLike: (tweetId: string, userId: string) => Promise<void>;
+  setRetweet: (tweetId: string, userId: string) => Promise<void>
   setCurrentTweeet: (id: string) => void;
 }
 

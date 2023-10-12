@@ -1,4 +1,4 @@
-import { TweetData, Tweet, User, Like } from "@/interfaces";
+import { TweetData, Tweet, User, Like, Retweet } from "@/interfaces";
 import { TweetsState } from ".";
 
 type TweetsActionType =
@@ -12,7 +12,21 @@ type TweetsActionType =
     }
   | {
       type: "[Tweets] - set-like";
-      payload: { tweetId: string;userId: string, like: Like; isLiked: boolean };
+      payload: {
+        tweetId: string;
+        userId: string;
+        like: Like;
+        isLiked: boolean;
+      };
+    }
+  | {
+      type: "[Tweets] - set-retweet";
+      payload: {
+        tweetId: string;
+        userId: string;
+        retweet: Retweet;
+        isRetweeted: boolean;
+      };
     };
 
 export const tweetsReducer = (
@@ -89,6 +103,40 @@ export const tweetsReducer = (
             return tweetData;
           }
         }),
+      };
+
+    case "[Tweets] - set-retweet":
+      return {
+        ...state,
+        tweetsData: state.tweetsData.map((tweetData: TweetData) => {
+          if (tweetData.tweet?.id === action.payload.tweetId) {
+            if (action.payload.isRetweeted) {
+              return {
+                ...tweetData,
+                tweet: {
+                  ...tweetData.tweet,
+                  retweets: [
+                    ...tweetData.tweet.retweets,
+                    action.payload.retweet,
+                  ],
+                },
+              };
+            } else {
+              return {
+                ...tweetData,
+                tweet: {
+                  ...tweetData.tweet,
+                  retweets: tweetData.tweet.retweets.filter(
+                    (retweet: Retweet) =>
+                      retweet.userId !== action.payload.userId
+                  ),
+                },
+              };
+            }
+          } else {
+            return tweetData;
+          }
+        }) as TweetData[],
       };
     default:
       return state;

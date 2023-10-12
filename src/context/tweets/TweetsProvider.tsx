@@ -161,6 +161,36 @@ export const TweetsProvider: FC<TweetsProviderProps> = ({ children }) => {
     }
   };
 
+  const setRetweet = async (tweetId: string, userId: string) => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/tweets/retweets/${tweetId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId }),
+        }
+      );
+      const data = await response.json();
+      if (data.ok) {
+        dispatch({ 
+          type:"[Tweets] - set-retweet",
+          payload: {
+            tweetId,
+            retweet: data.retweet,
+            isRetweeted: data.isRetweeted,
+            userId
+          }
+        }); 
+        return; 
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <TweetsContext.Provider
       value={{
@@ -170,6 +200,7 @@ export const TweetsProvider: FC<TweetsProviderProps> = ({ children }) => {
         setCurrentTweeet,
         createComment,
         setLike,
+        setRetweet,
       }}
     >
       {children}

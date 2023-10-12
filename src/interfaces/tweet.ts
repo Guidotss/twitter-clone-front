@@ -6,16 +6,18 @@ export interface Tweet {
   likes: Like[];
   createdAt: Date;
   updatedAt: Date;
-  retweets: Tweet[];
+  retweets: Retweet[];
   comments: Comment[];
 }
 
-export interface Like { 
+export interface Like {
   id: string;
-  userId :string; 
+  userId: string;
   tweetId: string;
-  createdAt :Date; 
+  createdAt: Date;
 }
+
+export interface Retweet extends Like {}
 
 export interface Comment {
   id: string;

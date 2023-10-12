@@ -2,6 +2,7 @@ interface IconProps {
   height?: string;
   width?: string;
   isLiked?: boolean;
+  isRetweeted?: boolean;
 }
 
 export const TwitterIcon = ({ height, width }: IconProps) => (
@@ -184,9 +185,11 @@ export const CommentIcon = ({ width, height }: IconProps) => (
   </svg>
 );
 
-export const RePostIcon = ({ width, height }: IconProps) => (
+export const RePostIcon = ({ width, height, isRetweeted }: IconProps) => (
   <svg
-    className="fill-gray-700 hover:fill-green-500 transition-colors duration-300 ease-in-out"
+    className={`${
+      isRetweeted ? "fill-green-500" : "fill-gray-700"
+    } hover:fill-green-500 transition-colors duration-300 ease-in-out`}
     viewBox="0 0 24 24"
     aria-hidden="true"
     width={width || "20px"}
