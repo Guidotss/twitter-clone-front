@@ -1,11 +1,11 @@
 "use client";
-import { User } from "@/interfaces";
+import { GifsUser } from "@/interfaces";
 import Image from "next/image";
 import { MediaOptions } from "../MediaOptions";
 import { useContext, useState } from "react";
 import { TweetsContext, UiContext } from "@/context";
 
-export const CommentModalForm = ({ user }: { user: User }) => {
+export const CommentModalForm = ({ user }: { user: GifsUser }) => {
   const [content, setContent] = useState<string>("");
   const { currentTweet, createComment } = useContext(TweetsContext);
   const { closeCommentModal } = useContext(UiContext);

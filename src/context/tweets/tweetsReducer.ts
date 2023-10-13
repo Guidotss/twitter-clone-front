@@ -1,4 +1,4 @@
-import { TweetData, Tweet, User, Like, Retweet } from "@/interfaces";
+import { TweetData, Tweet, GifsUser, Like, Retweet } from "@/interfaces";
 import { TweetsState } from ".";
 
 type TweetsActionType =

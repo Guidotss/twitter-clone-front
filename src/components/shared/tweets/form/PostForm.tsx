@@ -1,9 +1,14 @@
 "use client";
-import { FormEvent, useContext, useState } from "react";
-import { GifIcon, ImageIcon } from "../..";
+import { FormEvent, useContext, useState, useRef, useEffect } from "react";
 import { AuthContext, TweetsContext } from "@/context";
 import Image from "next/image";
 import { MediaOptions } from "@/components/tweets/MediaOptions";
+import { CloseIcon, LeftArrowIcon, LoaderIcon } from "../..";
+import { useGif } from "@/hooks";
+import { GIF, GifData } from "@/interfaces";
+import { GifModal } from "../../gifs";
+
+
 
 export const PostForm = () => {
   const [content, setContent] = useState<string>("");
@@ -43,7 +48,7 @@ export const PostForm = () => {
         </div>
       </div>
       <div className="flex justify-between items-center mb-5 px-10">
-        <MediaOptions/>
+        <MediaOptions />
         <button
           className={`bg-twitter ${
             !content && "opacity-60"
@@ -54,6 +59,7 @@ export const PostForm = () => {
           Postear
         </button>
       </div>
+      <GifModal />
     </>
   );
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import { Tweet, User } from "@/interfaces";
+import { Tweet, GifsUser } from "@/interfaces";
 import Image from "next/image";
 import { CommentIcon, LikeIcon, MoreOptionsIcon, RePostIcon } from "..";
 import { useContext } from "react";
@@ -9,7 +9,7 @@ import { TweetData } from "./TweetData";
 
 interface TweetCardProps {
   tweet: Tweet;
-  user: User;
+  user: GifsUser;
 }
 
 export const TweetCard = ({ tweet, user }: TweetCardProps) => {
@@ -70,7 +70,7 @@ export const TweetCard = ({ tweet, user }: TweetCardProps) => {
               onClick={handleRetweet}
             >
               <i className="hover:bg-green-500 hover:bg-opacity-10 transition-colors duration-300 ease-in-out p-2 rounded-full focus:outline-none">
-                <RePostIcon  isRetweeted={!!isRetweeted}/>
+                <RePostIcon isRetweeted={!!isRetweeted} />
               </i>
               <span className="font-light">{tweet.retweets.length}</span>
             </li>

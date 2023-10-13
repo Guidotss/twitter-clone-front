@@ -1,8 +1,8 @@
-import { User } from "@/interfaces";
+import { GifsUser } from "@/interfaces";
 import { AuthState } from ".";
 
 type AuthActionType =
-  | { type: "[AUTH] - login"; payload: User }
+  | { type: "[AUTH] - login"; payload: GifsUser }
   | { type: "[AUTH] - logout" };
 
 export const authReducer = (

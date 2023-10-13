@@ -1,7 +1,7 @@
-import { Tweet, User } from "@/interfaces";
+import { Tweet, GifsUser } from "@/interfaces";
 
 interface TweetDataProps {
-  user: User;
+  user: GifsUser;
   tweet: Tweet;
 }
 

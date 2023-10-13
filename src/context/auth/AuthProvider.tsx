@@ -4,14 +4,14 @@ import { signInWithGithub, signInWithGoogle } from "@/firebase";
 import { toast } from "react-hot-toast";
 import Cookies from "js-cookie";
 import { AuthContext, authReducer } from ".";
-import { AuthResponse, User } from "@/interfaces";
+import { AuthResponse, GifsUser } from "@/interfaces";
 
 interface AuthProviderProps {
   children: React.ReactNode;
 }
 
 export interface AuthState {
-  user: User | null;
+  user: GifsUser | null;
 }
 
 export const AUTH_INITIAL_STATE: AuthState = {

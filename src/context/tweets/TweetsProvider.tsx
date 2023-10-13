@@ -2,7 +2,7 @@
 import { FC, useEffect, useReducer } from "react";
 import { toast } from "react-hot-toast";
 import { TweetsContext, tweetsReducer } from ".";
-import { TweetData, Tweet, User } from "@/interfaces";
+import { TweetData, Tweet, GifsUser } from "@/interfaces";
 
 interface TweetsProviderProps {
   children: React.ReactNode;
