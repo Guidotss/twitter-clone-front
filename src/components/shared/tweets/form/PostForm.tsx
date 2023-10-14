@@ -1,11 +1,8 @@
 "use client";
-import { FormEvent, useContext, useState, useRef, useEffect } from "react";
-import { AuthContext, TweetsContext } from "@/context";
+import { FormEvent, useContext, useState } from "react";
+import { AuthContext, TweetsContext, UiContext } from "@/context";
 import Image from "next/image";
 import { MediaOptions } from "@/components/tweets/MediaOptions";
-import { CloseIcon, LeftArrowIcon, LoaderIcon } from "../..";
-import { useGif } from "@/hooks";
-import { GIF, GifData } from "@/interfaces";
 import { GifModal } from "../../gifs";
 
 
@@ -14,12 +11,17 @@ export const PostForm = () => {
   const [content, setContent] = useState<string>("");
   const { createTweet } = useContext(TweetsContext);
   const { user } = useContext(AuthContext);
+  const { isGifsModalOpen, openGifsModal } = useContext(UiContext); 
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     createTweet(user?.id!, content);
     setContent("");
   };
+
+  const handleGifsModal = () =>{
+    openGifsModal();
+  }
 
   return (
     <>
@@ -48,7 +50,7 @@ export const PostForm = () => {
         </div>
       </div>
       <div className="flex justify-between items-center mb-5 px-10">
-        <MediaOptions />
+        <MediaOptions openGifsModal={handleGifsModal}/>
         <button
           className={`bg-twitter ${
             !content && "opacity-60"
@@ -59,7 +61,9 @@ export const PostForm = () => {
           Postear
         </button>
       </div>
-      <GifModal />
+      {isGifsModalOpen && ( 
+        <GifModal />
+      )}
     </>
   );
 };

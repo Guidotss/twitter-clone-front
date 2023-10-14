@@ -11,6 +11,7 @@ export interface UiState {
   isLoginModalOpen: boolean;
   isLogoutModalOpen: boolean;
   isCommentModalOpen: boolean;
+  isGifsModalOpen: boolean;
 }
 
 const UI_INITIAL_STATE: UiState = {
@@ -18,6 +19,7 @@ const UI_INITIAL_STATE: UiState = {
   isLoginModalOpen: false,
   isLogoutModalOpen: false,
   isCommentModalOpen: false,
+  isGifsModalOpen: false,
 };
 
 export const UiProvider: FC<UiProviderProps> = ({ children }) => {
@@ -38,6 +40,9 @@ export const UiProvider: FC<UiProviderProps> = ({ children }) => {
   const closeCommentModal = () =>
     dispatch({ type: "[UI] close-comment-modal" });
 
+  const openGifsModal = () => dispatch({ type: "[UI] open-gifs-modal" });
+  const closeGifsModal = () => dispatch({ type: "[UI] close-gifs-modal" });
+
   return (
     <UiContext.Provider
       value={{
@@ -51,6 +56,8 @@ export const UiProvider: FC<UiProviderProps> = ({ children }) => {
         closeLogoutModal,
         openCommentModal,
         closeCommentModal,
+        openGifsModal,
+        closeGifsModal,
       }}
     >
       {children}

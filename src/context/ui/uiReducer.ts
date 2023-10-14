@@ -8,7 +8,9 @@ type UiActionType =
   | { type: "[UI] open-logout-modal" }
   | { type: "[UI] close-logout-modal" }
   | { type: "[UI] open-comment-modal" }
-  | { type: "[UI] close-comment-modal" };
+  | { type: "[UI] close-comment-modal" }
+  | { type: "[UI] open-gifs-modal" }
+  | { type: "[UI] close-gifs-modal" };
 
 export const uiReducer = (state: UiState, action: UiActionType): UiState => {
   switch (action.type) {
@@ -56,6 +58,18 @@ export const uiReducer = (state: UiState, action: UiActionType): UiState => {
       return {
         ...state,
         isCommentModalOpen: false,
+      };
+    
+    case "[UI] open-gifs-modal":
+      return {
+        ...state,
+        isGifsModalOpen: true,
+      };
+
+    case "[UI] close-gifs-modal":
+      return {
+        ...state,
+        isGifsModalOpen: false,
       };
 
     default:

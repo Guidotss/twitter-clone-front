@@ -6,6 +6,7 @@ interface UiContext {
   isRegisterModalOpen: boolean;
   isLogoutModalOpen: boolean;
   isCommentModalOpen: boolean;
+  isGifsModalOpen: boolean;
 
   openRegisterModal: () => void;
   closeRegisterModal: () => void;
@@ -18,6 +19,10 @@ interface UiContext {
 
   openCommentModal: () => void;
   closeCommentModal: () => void;
+
+  openGifsModal: () => void;
+  closeGifsModal: () => void;
+
 }
 
 export const UiContext = createContext({} as UiContext);

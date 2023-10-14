@@ -1,9 +1,10 @@
 "use client";
+import { useContext, useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { UiContext } from "@/context";
 import { useGif } from "@/hooks";
-import { useEffect, useRef, useState } from "react";
 import { CloseIcon, LeftArrowIcon, LoaderIcon } from "..";
 import { GIF, GifData } from "@/interfaces";
-import Image from "next/image";
 
 export const GifModal = () => {
   const {
@@ -17,7 +18,7 @@ export const GifModal = () => {
   } = useGif();
   const [term, setTerm] = useState<string>("");
   const bottomRef = useRef<null | HTMLDivElement>(null);
-  const [isObserving, setIsObserving] = useState<boolean>();
+  const { closeGifsModal } = useContext(UiContext);
 
   useEffect(() => {
     const options = {
@@ -30,7 +31,7 @@ export const GifModal = () => {
         if (entry.isIntersecting) {
           handleSearchByCategory(currentCategory);
           observer.unobserve(bottomRef.current!);
-          setIsObserving(false);
+          
         }
       }, options);
     });
@@ -38,19 +39,22 @@ export const GifModal = () => {
 
     return () => {
       if (bottomRef.current) observer.unobserve(bottomRef.current);
-      
     };
-  }, [isObserving]);
+  });
+
+  const handleGifsModal = () => {
+    closeGifsModal();
+  }
 
   return (
-    <div className="fixed top-0 left-0 w-full h-screen bg-modal flex flex-col items-center">
-      <div className="bg-black lg:w-[30vw] lg:h-[71vh] mt-20 rounded-2xl px-[2px] overflow-y-scroll">
+    <div className="fixed top-0 left-0 w-full h-screen bg-modal flex flex-col items-center animate__animated animate__fadeIn animate__faster">
+      <div className="bg-black 2xl:w-[30vw] 2xl:h-[71vh] lg:w-[40vw] lg:h-[90vh] 2xl:mt-20 rounded-2xl px-[2px] overflow-y-scroll">
         <form
-          className="flex gap-5 px-5 py-2 z-10 fixed bg-black w-[30vw] rounded-t-2xl "
+          className="flex gap-5 px-5 py-2 z-10 fixed bg-black 2xl:w-[30vw] lg:w-[40vw] rounded-t-2xl "
           onSubmit={(e) => handleSearch(e, term)}
         >
           {gifModalStep === 1 ? (
-            <button className="rounded-full hover:bg-gray-500 hover:bg-opacity-20 px-3 transition-colors duration-300 ease-in-out">
+            <button className="rounded-full hover:bg-gray-500 hover:bg-opacity-20 px-3 transition-colors duration-300 ease-in-out" onClick={handleGifsModal}>
               <CloseIcon />
             </button>
           ) : (
@@ -67,9 +71,9 @@ export const GifModal = () => {
             onChange={(e) => setTerm(e.target.value)}
           />
         </form>
-        <section>
+        <section className="lg:mt-14">
           {gifModalStep === 1 ? (
-            <div className="grid grid-cols-4 gap-1 mt-10">
+            <div className="grid grid-cols-4 gap-1 2xl:mt-10">
               {categoryGifs?.map((gif: GifData, index: number) => (
                 <div
                   key={gif.gif?.id}
@@ -86,7 +90,7 @@ export const GifModal = () => {
                     alt={gif?.gif?.title}
                     width={20}
                     height={20}
-                    className={`h-[17vh] w-full object-cover ${
+                    className={`2xl:h-[17vh] lg:h-[20vh] w-full object-cover ${
                       index === categoryGifs.length - 1 ? "rounded-b-2xl" : ""
                     }`}
                     priority
@@ -121,12 +125,12 @@ export const GifModal = () => {
                   />
                 </div>
               ))}
+              <div ref={bottomRef} className="flex justify-center w-full">
+                <LoaderIcon />
+              </div>
             </div>
           )}
         </section>
-        <div ref={bottomRef} className="flex justify-center w-full">
-          <LoaderIcon />
-        </div>
       </div>
     </div>
   );

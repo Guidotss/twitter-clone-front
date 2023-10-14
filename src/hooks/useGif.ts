@@ -8,6 +8,7 @@ export const useGif = () => {
   const [gifModalStep, setGifModalStep] = useState<number>(1);
   const [currentCategory, setCurrentCategory] = useState<string>("");
   const [offset, setOffset] = useState<number>(0);
+  const [isObserving, setIsObserving] = useState<boolean>();
 
   useEffect(() => {
     getGifs();
@@ -45,9 +46,11 @@ export const useGif = () => {
     gifModalStep,
     gifsByCategory,
     currentCategory,
+    isObserving,
 
     handleSearch,
     handleSearchByCategory,
     setGifModalStep,
+    setIsObserving,
   };
 };
