@@ -9,6 +9,29 @@ export const useGif = () => {
   const [currentCategory, setCurrentCategory] = useState<string>("");
   const [offset, setOffset] = useState<number>(0);
   const [isObserving, setIsObserving] = useState<boolean>();
+  const bottomRef = useRef<null | HTMLDivElement>(null);
+
+
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 1.0,
+    };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          handleSearchByCategory(currentCategory);
+          observer.unobserve(bottomRef.current!);
+        }
+      }, options);
+    });
+    if (bottomRef.current) observer.observe(bottomRef.current);
+
+    return () => {
+      if (bottomRef.current) observer.unobserve(bottomRef.current);
+    };
+  });
 
   useEffect(() => {
     getGifs();
@@ -47,6 +70,7 @@ export const useGif = () => {
     gifsByCategory,
     currentCategory,
     isObserving,
+    bottomRef,
 
     handleSearch,
     handleSearchByCategory,

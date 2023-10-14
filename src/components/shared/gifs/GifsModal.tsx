@@ -1,134 +1,50 @@
 "use client";
-import { useContext, useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import { useContext, useState } from "react";
 import { UiContext } from "@/context";
 import { useGif } from "@/hooks";
-import { CloseIcon, LeftArrowIcon, LoaderIcon } from "..";
-import { GIF, GifData } from "@/interfaces";
+import { GifsModalStepOne } from "./GifsModalStepOne";
+import { GifsModalStepTwo } from "./GifsModalStepTwo";
+import { GifsModalForm } from "./GifsModalForm";
 
 export const GifModal = () => {
   const {
     categoryGifs,
     gifModalStep,
     gifsByCategory,
-    currentCategory,
+    bottomRef,
     handleSearch,
     handleSearchByCategory,
     setGifModalStep,
   } = useGif();
   const [term, setTerm] = useState<string>("");
-  const bottomRef = useRef<null | HTMLDivElement>(null);
   const { closeGifsModal } = useContext(UiContext);
-
-  useEffect(() => {
-    const options = {
-      root: null,
-      rootMargin: "0px",
-      threshold: 1.0,
-    };
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          handleSearchByCategory(currentCategory);
-          observer.unobserve(bottomRef.current!);
-          
-        }
-      }, options);
-    });
-    if (bottomRef.current) observer.observe(bottomRef.current);
-
-    return () => {
-      if (bottomRef.current) observer.unobserve(bottomRef.current);
-    };
-  });
 
   const handleGifsModal = () => {
     closeGifsModal();
-  }
+  };
 
   return (
     <div className="fixed top-0 left-0 w-full h-screen bg-modal flex flex-col items-center animate__animated animate__fadeIn animate__faster">
       <div className="bg-black 2xl:w-[30vw] 2xl:h-[71vh] lg:w-[40vw] lg:h-[90vh] 2xl:mt-20 rounded-2xl px-[2px] overflow-y-scroll">
-        <form
-          className="flex gap-5 px-5 py-2 z-10 fixed bg-black 2xl:w-[30vw] lg:w-[40vw] rounded-t-2xl "
-          onSubmit={(e) => handleSearch(e, term)}
-        >
-          {gifModalStep === 1 ? (
-            <button className="rounded-full hover:bg-gray-500 hover:bg-opacity-20 px-3 transition-colors duration-300 ease-in-out" onClick={handleGifsModal}>
-              <CloseIcon />
-            </button>
-          ) : (
-            <button
-              className="rounded-full hover:bg-gray-500 hover:bg-opacity-20 px-3 transition-colors duration-300 ease-in-out"
-              onClick={() => setGifModalStep(1)}
-            >
-              <LeftArrowIcon />
-            </button>
-          )}
-          <input
-            className="bg-transparent border-[1px] border-gray-500 rounded-full px-5 py-2 font-light focus:border-twitter focus:border-2 outline-none w-full text-gray-200 transition-all duration-100 ease-linear"
-            placeholder="Search GIF"
-            onChange={(e) => setTerm(e.target.value)}
-          />
-        </form>
+        <GifsModalForm
+          handleGifsModal={handleGifsModal}
+          handleSearch={handleSearch}
+          setGifModalStep={setGifModalStep}
+          gifModalStep={gifModalStep}
+          term={term}
+          setTerm={setTerm}
+        />
         <section className="lg:mt-14">
           {gifModalStep === 1 ? (
-            <div className="grid grid-cols-4 gap-1 2xl:mt-10">
-              {categoryGifs?.map((gif: GifData, index: number) => (
-                <div
-                  key={gif.gif?.id}
-                  className={`${
-                    index === categoryGifs.length - 1
-                      ? "col-span-4"
-                      : "col-span-2"
-                  } relative cursor-pointer`}
-                  onClick={() => handleSearchByCategory(gif.name)}
-                >
-                  <Image
-                    src={gif?.gif?.images.downsized.url || ""}
-                    loader={({ src }) => src}
-                    alt={gif?.gif?.title}
-                    width={20}
-                    height={20}
-                    className={`2xl:h-[17vh] lg:h-[20vh] w-full object-cover ${
-                      index === categoryGifs.length - 1 ? "rounded-b-2xl" : ""
-                    }`}
-                    priority
-                    unoptimized
-                  />
-                  <div className="absolute bottom-0 left-0 w-full  text-start px-2 py-1">
-                    <span className="text-white font-semibold text-lg">
-                      {gif.name}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <GifsModalStepOne
+              categoryGifs={categoryGifs!}
+              handleSearchByCategory={handleSearchByCategory}
+            />
           ) : (
-            <div className="grid grid-cols-4">
-              {gifsByCategory?.map((gif: GIF, index: number) => (
-                <div
-                  key={gif?.id}
-                  className={`col-span-${
-                    Math.ceil(Math.random() * 15) / 4
-                  } relative cursor-pointer`}
-                >
-                  <Image
-                    src={gif?.images?.downsized?.url || ""}
-                    loader={({ src }) => src}
-                    alt={gif?.title}
-                    width={20}
-                    height={20}
-                    className={`h-[16vh] w-full object-cover`}
-                    unoptimized
-                    loading="lazy"
-                  />
-                </div>
-              ))}
-              <div ref={bottomRef} className="flex justify-center w-full">
-                <LoaderIcon />
-              </div>
-            </div>
+            <GifsModalStepTwo
+              gifsByCategory={gifsByCategory!}
+              bottomRef={bottomRef}
+            />
           )}
         </section>
       </div>
