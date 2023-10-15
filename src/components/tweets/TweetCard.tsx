@@ -1,6 +1,6 @@
 "use client";
 
-import { Tweet, GifsUser } from "@/interfaces";
+import { Tweet, User } from "@/interfaces";
 import Image from "next/image";
 import { CommentIcon, LikeIcon, MoreOptionsIcon, RePostIcon } from "..";
 import { useContext } from "react";
@@ -9,7 +9,7 @@ import { TweetData } from "./TweetData";
 
 interface TweetCardProps {
   tweet: Tweet;
-  user: GifsUser;
+  user: User;
 }
 
 export const TweetCard = ({ tweet, user }: TweetCardProps) => {
@@ -36,7 +36,7 @@ export const TweetCard = ({ tweet, user }: TweetCardProps) => {
   );
 
   return (
-    <div className="flex gap-3 px-5 py-2 hover:bg-gray-700 hover:bg-opacity-10 transition-colors duration-300 ease-in-out cursor-pointer">
+    <div className="flex gap-3 px-5 py-2 hover:bg-gray-700 hover:bg-opacity-10 transition-colors  duration-300 ease-in-out cursor-pointer">
       <figure>
         <Image
           className="rounded-full p-1"

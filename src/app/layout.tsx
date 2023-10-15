@@ -1,6 +1,5 @@
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
-import { Toaster } from "react-hot-toast";
 import { Providers } from "@/providers/Providers";
 import "./globals.css";
 
@@ -27,8 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} overflow-y-hidden`}>
-        <Toaster position="top-center" reverseOrder={false} />
+      <body className={`${inter.className} overflow-y-scroll`}>
         <Providers>{children}</Providers>
       </body>
     </html>

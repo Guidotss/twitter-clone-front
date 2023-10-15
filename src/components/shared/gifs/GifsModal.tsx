@@ -1,5 +1,5 @@
 "use client";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { UiContext } from "@/context";
 import { useGif } from "@/hooks";
 import { GifsModalStepOne } from "./GifsModalStepOne";
@@ -17,11 +17,20 @@ export const GifModal = () => {
     setGifModalStep,
   } = useGif();
   const [term, setTerm] = useState<string>("");
-  const { closeGifsModal } = useContext(UiContext);
+  const { closeGifsModal, isGifsModalOpen } = useContext(UiContext);
 
   const handleGifsModal = () => {
     closeGifsModal();
   };
+
+  useEffect(() => {
+    if (!isGifsModalOpen) return;
+    
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isGifsModalOpen]);
 
   return (
     <div className="fixed top-0 left-0 w-full h-screen bg-modal flex flex-col items-center animate__animated animate__fadeIn animate__faster">

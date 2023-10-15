@@ -1,5 +1,5 @@
 "use client";
-import { useContext } from "react";
+import { useContext, useEffect } from 'react';
 import { AuthContext, TweetsContext, UiContext } from "@/context";
 import { CloseIcon } from "@/components";
 import { CommentModalForm } from "./CommentModalForm";
@@ -9,6 +9,14 @@ export const CommentModal = () => {
   const { isCommentModalOpen, closeCommentModal } = useContext(UiContext);
   const { currentTweet } = useContext(TweetsContext);
   const { user } = useContext(AuthContext);
+
+  useEffect(() => { 
+    if (!isCommentModalOpen) return;
+    document.body.style.overflow = "hidden";
+    return () => { 
+      document.body.style.overflow = "unset";
+    }
+  },[isCommentModalOpen]);
 
   return (
     isCommentModalOpen && (

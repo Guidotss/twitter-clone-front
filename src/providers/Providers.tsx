@@ -1,5 +1,7 @@
 "use client";
-import { AuthProvider, TweetsProvider, UiProvider } from "@/context";
+import { AuthProvider, TweetsProvider, UiContext, UiProvider } from "@/context";
+import { Toaster } from "react-hot-toast";
+import { useContext } from "react";
 
 interface ProviderProps {
   children: React.ReactNode;
@@ -8,12 +10,10 @@ interface ProviderProps {
 export const Providers = ({ children }: ProviderProps) => {
   return (
     <UiProvider>
+      <Toaster position="top-center" reverseOrder={false} />
       <AuthProvider>
-        <TweetsProvider>
-          {children}
-        </TweetsProvider>
+        <TweetsProvider>{children}</TweetsProvider>
       </AuthProvider>
     </UiProvider>
-
   );
 };

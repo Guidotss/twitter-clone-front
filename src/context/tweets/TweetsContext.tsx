@@ -1,5 +1,5 @@
 "use client";
-import { TweetData, Tweet, GifsUser } from "@/interfaces";
+import { TweetData, Tweet, User } from "@/interfaces";
 import { createContext } from "react";
 
 interface TweetsContextProps {

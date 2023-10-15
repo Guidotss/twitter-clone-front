@@ -1,6 +1,6 @@
-import { Tweet, GifsUser } from "@/interfaces";
+import { Tweet, User } from "@/interfaces";
 
 export interface TweetData {
-  user: GifsUser;
+  user: User;
   tweet?: Tweet;
 }
