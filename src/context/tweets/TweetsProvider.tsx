@@ -55,7 +55,7 @@ export const TweetsProvider: FC<TweetsProviderProps> = ({ children }) => {
     }
   };
 
-  const createTweet = async (userId: string, content: string) => {
+  const createTweet = async (userId: string, content: string, gifUrl?: string) => {
     try {
       dispatch({ type: "[Tweets] - loading" });
       const response = await fetch(
@@ -65,7 +65,7 @@ export const TweetsProvider: FC<TweetsProviderProps> = ({ children }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ userId, content }),
+          body: JSON.stringify({ userId, content, gifUrl }),
         }
       );
       const data = await response.json();

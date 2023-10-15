@@ -6,7 +6,11 @@ import { GifsModalStepOne } from "./GifsModalStepOne";
 import { GifsModalStepTwo } from "./GifsModalStepTwo";
 import { GifsModalForm } from "./GifsModalForm";
 
-export const GifModal = () => {
+
+interface Props  {
+  setGifUrl: React.Dispatch<React.SetStateAction<string>>;
+}
+export const GifModal = ({ setGifUrl } : Props) => {
   const {
     categoryGifs,
     gifModalStep,
@@ -53,6 +57,7 @@ export const GifModal = () => {
             <GifsModalStepTwo
               gifsByCategory={gifsByCategory!}
               bottomRef={bottomRef}
+              setGifUrl={setGifUrl}
             />
           )}
         </section>

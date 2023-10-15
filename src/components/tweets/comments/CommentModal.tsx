@@ -1,5 +1,5 @@
 "use client";
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect } from "react";
 import { AuthContext, TweetsContext, UiContext } from "@/context";
 import { CloseIcon } from "@/components";
 import { CommentModalForm } from "./CommentModalForm";
@@ -10,18 +10,18 @@ export const CommentModal = () => {
   const { currentTweet } = useContext(TweetsContext);
   const { user } = useContext(AuthContext);
 
-  useEffect(() => { 
+  useEffect(() => {
     if (!isCommentModalOpen) return;
     document.body.style.overflow = "hidden";
-    return () => { 
+    return () => {
       document.body.style.overflow = "unset";
-    }
-  },[isCommentModalOpen]);
+    };
+  }, [isCommentModalOpen]);
 
   return (
     isCommentModalOpen && (
       <div className="fixed flex flex-col items-center  h-screen w-full bg-modal animate__animated animate__fadeIn animate__faster">
-        <div 
+        <div
           className="flex flex-col w-[30vw] min-h-[35vh] gap-5 bg-black rounded-xl mt-10 p-4"
           about="Comment Modal"
         >

@@ -1,14 +1,14 @@
 import { GIF } from "@/interfaces";
 import Image from "next/image";
-import { type FC } from 'react';
+import { type FC } from "react";
 import { LoaderIcon } from "..";
 
-
 interface Props {
-    gifsByCategory: GIF[];
-    bottomRef: React.MutableRefObject<HTMLDivElement | null >;
+  gifsByCategory: GIF[];
+  bottomRef: React.MutableRefObject<HTMLDivElement | null>;
+  setGifUrl: React.Dispatch<React.SetStateAction<string>>;
 }
-export const GifsModalStepTwo:FC<Props> = ({ gifsByCategory, bottomRef }) => {
+export const GifsModalStepTwo: FC<Props> = ({ gifsByCategory, bottomRef, setGifUrl }) => {
   return (
     <div className="grid grid-cols-4">
       {gifsByCategory?.map((gif: GIF, index: number) => (
@@ -17,6 +17,7 @@ export const GifsModalStepTwo:FC<Props> = ({ gifsByCategory, bottomRef }) => {
           className={`col-span-${
             Math.ceil(Math.random() * 15) / 4
           } relative cursor-pointer`}
+          onClick={() => setGifUrl(gif?.images?.downsized?.url || "")}
         >
           <Image
             src={gif?.images?.downsized?.url || ""}

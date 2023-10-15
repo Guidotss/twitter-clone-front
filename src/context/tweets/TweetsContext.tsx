@@ -7,8 +7,8 @@ interface TweetsContextProps {
   currentTweet?: TweetData; 
   tweetsData: TweetData[];
   
-  createTweet: (userId: string, content: string ) => Promise<void>;
-  createComment(tweetId: string, userId: string, content: string): Promise<void>;
+  createTweet: (userId: string, content: string ,gifUrl?: string) => Promise<void>;
+  createComment(tweetId: string, userId: string, content: string ): Promise<void>;
   setLike: (tweetId: string, userId: string) => Promise<void>;
   setRetweet: (tweetId: string, userId: string) => Promise<void>
   setCurrentTweeet: (id: string) => void;

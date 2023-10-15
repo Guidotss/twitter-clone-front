@@ -5,23 +5,22 @@ import Image from "next/image";
 import { MediaOptions } from "@/components/tweets/MediaOptions";
 import { GifModal } from "../../gifs";
 
-
-
 export const PostForm = () => {
   const [content, setContent] = useState<string>("");
+  const [gifUrl, setGifUrl] = useState<string>("");
   const { createTweet } = useContext(TweetsContext);
   const { user } = useContext(AuthContext);
-  const { isGifsModalOpen, openGifsModal } = useContext(UiContext); 
+  const { isGifsModalOpen, openGifsModal } = useContext(UiContext);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    createTweet(user?.id!, content);
+    createTweet(user?.id!, content, gifUrl);
     setContent("");
   };
 
-  const handleGifsModal = () =>{
+  const handleGifsModal = () => {
     openGifsModal();
-  }
+  };
 
   return (
     <>
@@ -50,7 +49,7 @@ export const PostForm = () => {
         </div>
       </div>
       <div className="flex justify-between items-center mb-5 px-10">
-        <MediaOptions openGifsModal={handleGifsModal}/>
+        <MediaOptions openGifsModal={handleGifsModal} />
         <button
           className={`bg-twitter ${
             !content && "opacity-60"
@@ -61,9 +60,7 @@ export const PostForm = () => {
           Postear
         </button>
       </div>
-      {isGifsModalOpen && ( 
-        <GifModal />
-      )}
+      {isGifsModalOpen && <GifModal setGifUrl={setGifUrl} />}
     </>
   );
 };
