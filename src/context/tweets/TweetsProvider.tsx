@@ -56,6 +56,7 @@ export const TweetsProvider: FC<TweetsProviderProps> = ({ children }) => {
   };
 
   const createTweet = async (userId: string, content: string, gifUrl?: string) => {
+    console.log(gifUrl); 
     try {
       dispatch({ type: "[Tweets] - loading" });
       const response = await fetch(

@@ -58,6 +58,7 @@ export const GifModal = ({ setGifUrl } : Props) => {
               gifsByCategory={gifsByCategory!}
               bottomRef={bottomRef}
               setGifUrl={setGifUrl}
+              closeGifModal={closeGifsModal}
             />
           )}
         </section>

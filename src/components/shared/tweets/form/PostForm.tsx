@@ -8,6 +8,7 @@ import { GifModal } from "../../gifs";
 export const PostForm = () => {
   const [content, setContent] = useState<string>("");
   const [gifUrl, setGifUrl] = useState<string>("");
+
   const { createTweet } = useContext(TweetsContext);
   const { user } = useContext(AuthContext);
   const { isGifsModalOpen, openGifsModal } = useContext(UiContext);
@@ -16,6 +17,7 @@ export const PostForm = () => {
     e.preventDefault();
     createTweet(user?.id!, content, gifUrl);
     setContent("");
+    setGifUrl("");
   };
 
   const handleGifsModal = () => {
@@ -25,7 +27,7 @@ export const PostForm = () => {
   return (
     <>
       <div className="flex gap-5 items-center mt-4 h-24 px-5">
-        <div className="flex items-center w-full">
+        <div className="flex items-center w-full 2xl:mt-5">
           <figure className="-mt-6">
             {!user?.imageUrl ? (
               <div className="w-10 h-10 rounded-full animate-pulse bg-gray-500 bg-opacity-20" />
@@ -47,6 +49,18 @@ export const PostForm = () => {
             onChange={(e) => setContent(e.target.value)}
           />
         </div>
+      </div>
+      <div className="self-center mb-5">
+        {gifUrl && (
+          <Image
+            className="rounded-lg"
+            src={gifUrl}
+            alt="gif"
+            width={500}
+            height={400}
+            loader={({ src }) => src}
+          />
+        )}
       </div>
       <div className="flex justify-between items-center mb-5 px-10">
         <MediaOptions openGifsModal={handleGifsModal} />

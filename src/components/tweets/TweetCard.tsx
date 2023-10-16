@@ -53,8 +53,18 @@ export const TweetCard = ({ tweet, user }: TweetCardProps) => {
             <MoreOptionsIcon />
           </button>
         </div>
+        
         <div className="flex flex-col gap-2">
           <span>{tweet.content}</span>
+          {tweet.gifUrl && (
+            <Image
+              src={tweet.gifUrl}
+              alt="gif"
+              width={500}
+              height={400}
+              className="rounded-lg"
+            />
+          )}
           <ul className="flex gap-16 items-center">
             <li
               className="flex items-center text-gray-700 hover:text-twitter transition-colors duration-300 ease-in-out"

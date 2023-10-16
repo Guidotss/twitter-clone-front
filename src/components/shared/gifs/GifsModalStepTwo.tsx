@@ -7,17 +7,27 @@ interface Props {
   gifsByCategory: GIF[];
   bottomRef: React.MutableRefObject<HTMLDivElement | null>;
   setGifUrl: React.Dispatch<React.SetStateAction<string>>;
+  closeGifModal: () => void;
 }
-export const GifsModalStepTwo: FC<Props> = ({ gifsByCategory, bottomRef, setGifUrl }) => {
+export const GifsModalStepTwo: FC<Props> = ({
+  gifsByCategory,
+  bottomRef,
+  setGifUrl,
+  closeGifModal,
+}) => {
+  const handleSelectGif = (girUrl: string = "") => {
+    closeGifModal();
+    setGifUrl(girUrl);
+  };
   return (
     <div className="grid grid-cols-4">
-      {gifsByCategory?.map((gif: GIF, index: number) => (
+      {gifsByCategory?.map((gif: GIF) => (
         <div
           key={gif?.id}
           className={`col-span-${
             Math.ceil(Math.random() * 15) / 4
           } relative cursor-pointer`}
-          onClick={() => setGifUrl(gif?.images?.downsized?.url || "")}
+          onClick={() => handleSelectGif(gif.images.downsized.url)}
         >
           <Image
             src={gif?.images?.downsized?.url || ""}
