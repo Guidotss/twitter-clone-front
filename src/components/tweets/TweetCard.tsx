@@ -6,6 +6,8 @@ import { CommentIcon, LikeIcon, MoreOptionsIcon, RePostIcon } from "..";
 import { useContext } from "react";
 import { AuthContext, TweetsContext, UiContext } from "@/context";
 import { TweetData } from "./TweetData";
+import { MediaUpload } from "../shared/media";
+import { TweetsActions } from "./TweetsActions";
 
 interface TweetCardProps {
   tweet: Tweet;
@@ -53,59 +55,19 @@ export const TweetCard = ({ tweet, user }: TweetCardProps) => {
             <MoreOptionsIcon />
           </button>
         </div>
-        
+
         <div className="flex flex-col gap-2">
           <span>{tweet.content}</span>
-          {tweet.gifUrl ? (
-            <Image
-              src={tweet.gifUrl}
-              alt="gif"
-              width={500}
-              height={400}
-              className="rounded-lg"
-            />
-          ):(
-            tweet.imageUrl && (
-              <Image
-                src={tweet.imageUrl}
-                loader={({src}) => src}
-                alt="image"
-                width={500}
-                height={400}
-                className="rounded-lg"
-              />
-            )
-          )}
-          
-          <ul className="flex gap-16 items-center">
-            <li
-              className="flex items-center text-gray-700 hover:text-twitter transition-colors duration-300 ease-in-out"
-              onClick={onSetCurrentTweet}
-            >
-              <i className="hover:bg-twitter hover:bg-opacity-10 transition-colors duration-300 ease-in-out p-2 rounded-full focus:outline-none">
-                <CommentIcon />
-              </i>
-              <span className="font-light">{tweet.comments.length}</span>
-            </li>
-            <li
-              className="flex items-center text-gray-700 hover:text-green-500 transition-colors duration-300 ease-in-out"
-              onClick={handleRetweet}
-            >
-              <i className="hover:bg-green-500 hover:bg-opacity-10 transition-colors duration-300 ease-in-out p-2 rounded-full focus:outline-none">
-                <RePostIcon isRetweeted={!!isRetweeted} />
-              </i>
-              <span className="font-light">{tweet.retweets.length}</span>
-            </li>
-            <li className="flex items-center text-gray-700 hover:text-red-500 transition-colors duration-300 ease-in-out">
-              <i
-                className="hover:bg-red-500 hover:bg-opacity-10 transition-colors duration-300 ease-in-out p-2 rounded-full focus:outline-none"
-                onClick={handleLike}
-              >
-                <LikeIcon isLiked={!!isLiked} />
-              </i>
-              <span className="font-light">{tweet.likes.length}</span>
-            </li>
-          </ul>
+          <MediaUpload gifUrl={tweet.gifUrl} imageUrl={tweet.imageUrl} />
+
+          <TweetsActions
+            isRetweeted={!!isRetweeted}
+            isLiked={!!isLiked}
+            tweet={tweet}
+            onSetCurrentTweet={onSetCurrentTweet}
+            handleLike={handleLike}
+            handleRetweet={handleRetweet}
+          />
         </div>
       </div>
     </div>

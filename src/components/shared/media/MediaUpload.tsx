@@ -5,7 +5,7 @@ import { LoaderIcon } from "..";
 interface Props {
   gifUrl?: string;
   imageUrl?: string;
-  isLoadingImage: boolean;
+  isLoadingImage?: boolean;
 }
 
 export const MediaUpload: FC<Props> = ({
