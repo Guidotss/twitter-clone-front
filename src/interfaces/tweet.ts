@@ -2,6 +2,7 @@ export interface Tweet {
   id: string;
   content: string;
   gifUrl?: string;
+  imageUrl?: string;
   likes: Like[];
   createdAt: Date;
   updatedAt: Date;

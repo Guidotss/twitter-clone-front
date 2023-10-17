@@ -1,13 +1,16 @@
 "use client";
 import { FormEvent, useContext, useState } from "react";
-import { AuthContext, TweetsContext, UiContext } from "@/context";
 import Image from "next/image";
+import { AuthContext, TweetsContext, UiContext } from "@/context";
 import { MediaOptions } from "@/components/tweets/MediaOptions";
-import { GifModal } from "../../gifs";
+import { GifModal } from "@/components/shared/gifs";
+import { useFile } from "@/hooks/useFile";
+import { MediaUpload } from "@/components/shared/media";
 
 export const PostForm = () => {
   const [content, setContent] = useState<string>("");
   const [gifUrl, setGifUrl] = useState<string>("");
+  const { imageUrl, isLoadingImage, setImage, setImageUrl } = useFile();
 
   const { createTweet } = useContext(TweetsContext);
   const { user } = useContext(AuthContext);
@@ -15,9 +18,10 @@ export const PostForm = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    createTweet(user?.id!, content, gifUrl);
+    createTweet(user?.id!, content, gifUrl,imageUrl);
     setContent("");
     setGifUrl("");
+    setImageUrl("");
   };
 
   const handleGifsModal = () => {
@@ -50,20 +54,13 @@ export const PostForm = () => {
           />
         </div>
       </div>
-      <div className="self-center mb-5">
-        {gifUrl && (
-          <Image
-            className="rounded-lg"
-            src={gifUrl}
-            alt="gif"
-            width={500}
-            height={400}
-            loader={({ src }) => src}
-          />
-        )}
-      </div>
+      <MediaUpload
+        gifUrl={gifUrl}
+        imageUrl={imageUrl}
+        isLoadingImage={isLoadingImage}
+      />
       <div className="flex justify-between items-center mb-5 px-10">
-        <MediaOptions openGifsModal={handleGifsModal} />
+        <MediaOptions openGifsModal={handleGifsModal} uploadImage={setImage} />
         <button
           className={`bg-twitter ${
             !content && "opacity-60"

@@ -56,7 +56,7 @@ export const TweetCard = ({ tweet, user }: TweetCardProps) => {
         
         <div className="flex flex-col gap-2">
           <span>{tweet.content}</span>
-          {tweet.gifUrl && (
+          {tweet.gifUrl ? (
             <Image
               src={tweet.gifUrl}
               alt="gif"
@@ -64,7 +64,19 @@ export const TweetCard = ({ tweet, user }: TweetCardProps) => {
               height={400}
               className="rounded-lg"
             />
+          ):(
+            tweet.imageUrl && (
+              <Image
+                src={tweet.imageUrl}
+                loader={({src}) => src}
+                alt="image"
+                width={500}
+                height={400}
+                className="rounded-lg"
+              />
+            )
           )}
+          
           <ul className="flex gap-16 items-center">
             <li
               className="flex items-center text-gray-700 hover:text-twitter transition-colors duration-300 ease-in-out"

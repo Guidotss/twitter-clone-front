@@ -48,6 +48,7 @@ export const TweetsProvider: FC<TweetsProviderProps> = ({ children }) => {
           type: "[Tweets] - load-tweets",
           payload: data.results! as TweetData[],
         });
+        console.log(data);
         return;
       }
     } catch (error) {
@@ -55,8 +56,13 @@ export const TweetsProvider: FC<TweetsProviderProps> = ({ children }) => {
     }
   };
 
-  const createTweet = async (userId: string, content: string, gifUrl?: string) => {
-    console.log(gifUrl); 
+  const createTweet = async (
+    userId: string,
+    content: string,
+    gifUrl?: string,
+    imageUrl?: string
+  ) => {
+    console.log(gifUrl);
     try {
       dispatch({ type: "[Tweets] - loading" });
       const response = await fetch(
@@ -66,7 +72,7 @@ export const TweetsProvider: FC<TweetsProviderProps> = ({ children }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ userId, content, gifUrl }),
+          body: JSON.stringify({ userId, content, gifUrl, imageUrl }),
         }
       );
       const data = await response.json();
@@ -176,16 +182,16 @@ export const TweetsProvider: FC<TweetsProviderProps> = ({ children }) => {
       );
       const data = await response.json();
       if (data.ok) {
-        dispatch({ 
-          type:"[Tweets] - set-retweet",
+        dispatch({
+          type: "[Tweets] - set-retweet",
           payload: {
             tweetId,
             retweet: data.retweet,
             isRetweeted: data.isRetweeted,
-            userId
-          }
-        }); 
-        return; 
+            userId,
+          },
+        });
+        return;
       }
     } catch (error) {
       console.log(error);
