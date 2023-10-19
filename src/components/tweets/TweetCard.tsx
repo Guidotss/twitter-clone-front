@@ -28,16 +28,19 @@ export const TweetCard = ({ tweet, user }: TweetCardProps) => {
     router.push(`/tweet/${tweet.id}`);
   }
 
-  const onSetCurrentTweet = () => {
+  const onSetCurrentTweet = (e:React.MouseEvent) => {
+    e.stopPropagation(); 
     setCurrentTweeet(tweet.id);
     openCommentModal();
   };
 
-  const handleLike = () => {
+  const handleLike = (e:React.MouseEvent) => {
+    e.stopPropagation();
     setLike(tweet.id, currentUser?.id!);
   };
 
-  const handleRetweet = () => {
+  const handleRetweet = (e:React.MouseEvent) => {
+    e.stopPropagation(); 
     setRetweet(tweet.id, currentUser?.id!);
   };
 

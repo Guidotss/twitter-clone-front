@@ -6,9 +6,9 @@ interface Props {
   isRetweeted?: boolean;
   isLiked?: boolean;
   tweet: Tweet;
-  onSetCurrentTweet: () => void;
-  handleLike: () => void;
-  handleRetweet: () => void;
+  onSetCurrentTweet: (e:React.MouseEvent) => void;
+  handleLike: (e:React.MouseEvent) => void;
+  handleRetweet: (e:React.MouseEvent) => void;
 }
 
 export const TweetsActions: FC<Props> = ({
