@@ -1,7 +1,6 @@
 "use client";
-
 import { useContext } from "react";
-import { useRouter } from 'next/navigation'; 
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { AuthContext, TweetsContext, UiContext } from "@/context";
 import { Tweet, User } from "@/interfaces";
@@ -16,31 +15,32 @@ interface TweetCardProps {
 }
 
 export const TweetCard = ({ tweet, user }: TweetCardProps) => {
-
   const router = useRouter();
 
   const { openCommentModal } = useContext(UiContext);
   const { setCurrentTweeet, setLike, setRetweet } = useContext(TweetsContext);
   const { user: currentUser } = useContext(AuthContext);
 
-  const handleNavigation = (e:React.MouseEvent) => {
-    e.stopPropagation(); 
-    router.push(`/tweet/${tweet.id}`);
-  }
+  const handleNavigation = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    router.push(`/tweets/${tweet.id}`);
+  };
 
-  const onSetCurrentTweet = (e:React.MouseEvent) => {
-    e.stopPropagation(); 
+  const onSetCurrentTweet = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setCurrentTweeet(tweet.id);
     openCommentModal();
   };
 
-  const handleLike = (e:React.MouseEvent) => {
+  const handleLike = (e: React.MouseEvent) => {
     e.stopPropagation();
     setLike(tweet.id, currentUser?.id!);
   };
 
-  const handleRetweet = (e:React.MouseEvent) => {
-    e.stopPropagation(); 
+  const handleRetweet = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.stopPropagation();
+
     setRetweet(tweet.id, currentUser?.id!);
   };
 
@@ -50,7 +50,10 @@ export const TweetCard = ({ tweet, user }: TweetCardProps) => {
   );
 
   return (
-    <div className="flex gap-3 px-5 py-2 hover:bg-gray-700 hover:bg-opacity-10 transition-colors  duration-300 ease-in-out cursor-pointer" onClick={(e) => handleNavigation(e)}>
+    <div
+      className="flex gap-3 px-5 py-2 hover:bg-gray-700 hover:bg-opacity-10 transition-colors  duration-300 ease-in-out cursor-pointer"
+      onClick={(e) => handleNavigation(e)}
+    >
       <figure>
         <Image
           className="rounded-full p-1"

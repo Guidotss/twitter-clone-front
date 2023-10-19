@@ -39,7 +39,7 @@ export const LoginModal = () => {
     const ok = await loginUser(email, password);
     if(ok) { 
       closeLoginModal();
-      router.push('/');
+      router.push('/tweets');
     }
   };
 
