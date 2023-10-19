@@ -48,7 +48,6 @@ export const TweetsProvider: FC<TweetsProviderProps> = ({ children }) => {
           type: "[Tweets] - load-tweets",
           payload: data.results! as TweetData[],
         });
-        console.log(data);
         return;
       }
     } catch (error) {
