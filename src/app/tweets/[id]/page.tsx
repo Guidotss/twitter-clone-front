@@ -1,3 +1,7 @@
+import { LeftArrowIcon } from "@/components";
+import { TweetCard } from "@/components/tweets/TweetCard";
+import Link from "next/link";
+
 async function GetTweetById(id: string) {
   try {
     const response = await fetch(
@@ -6,7 +10,7 @@ async function GetTweetById(id: string) {
     );
     const data = await response.json();
     if (data.ok) {
-      return data.tweet;
+      return data;
     }
   } catch (error) {
     console.log(error);
@@ -21,7 +25,20 @@ interface TweetPageProps {
 }
 export default async function TweetPage({ params }: TweetPageProps) {
   const { id } = params;
-  const tweet = await GetTweetById(id);
-  console.log(tweet);
-  return <h1>holaaa</h1>;
+  const { tweet } = await GetTweetById(id);
+  
+  return ( 
+    <main className="h-screen border-l-[1px] border-r-[1px] border-gray-700">
+      <header className="w-full flex items-center gap-10 p-5">
+        <Link href="/tweets">
+          <i>
+            <LeftArrowIcon/>
+          </i>
+        </Link>
+        <h1 className="text-xl font-bold">Post</h1>
+      </header>
+      <section className="mt-10">
+      </section>
+    </main>
+  )
 }
