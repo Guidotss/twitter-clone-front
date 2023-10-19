@@ -22,7 +22,7 @@ export const CommentModal = () => {
     isCommentModalOpen && (
       <div className="fixed flex flex-col items-center  h-screen w-full bg-modal animate__animated animate__fadeIn animate__faster">
         <div
-          className="flex flex-col w-[30vw] min-h-[35vh] gap-5 bg-black rounded-xl mt-10 p-4"
+          className="flex flex-col 2xl:w-[30vw]  lg:w-[40vw] min-h-[35vh] gap-5 bg-black rounded-xl mt-10 p-4"
           about="Comment Modal"
         >
           <header className="flex items-center justify-between">

@@ -6,6 +6,7 @@ import { AuthContext, UiContext } from "@/context";
 import Image from "next/image";
 import { LogoutModal } from "@/components/auth/LogoutModal";
 import { LoaderIcon } from "react-hot-toast";
+import Link from "next/link";
 
 type SidebarItem = {
   name: string;
@@ -47,9 +48,11 @@ export const Sidebar = () => {
 
   return (
     <aside className="mt-5 h-full fixed">
-      <figure>
-        <TwitterIcon width="50px" height="40px" />
-      </figure>
+      <Link href="/">
+        <i>
+          <TwitterIcon width="50px" height="40px" />
+        </i>
+      </Link>
       <ul className="ml-4 mt-5 flex flex-col gap-8">
         {sidebarItems.map((item, index) => (
           <li
