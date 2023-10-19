@@ -14,6 +14,7 @@ interface TweetPageProps {
   params: {
     id: string;
   };
+
 }
 export default async function TweetPage({ params }: TweetPageProps) {
   const { id } = params;
