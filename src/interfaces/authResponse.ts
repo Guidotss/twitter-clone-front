@@ -1,9 +1,9 @@
-import { GifsUser } from ".";
+import { GifsUser, User } from ".";
 
 export interface AuthResponse {
   ok: boolean;
-  message?: string;
+  message: string;
   error?: string;
   token?: string;
-  user?: GifsUser;
+  user?: User;
 }

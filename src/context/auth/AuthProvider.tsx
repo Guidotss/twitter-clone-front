@@ -4,14 +4,15 @@ import { signInWithGithub, signInWithGoogle } from "@/firebase";
 import { toast } from "react-hot-toast";
 import Cookies from "js-cookie";
 import { AuthContext, authReducer } from ".";
-import { AuthResponse, GifsUser } from "@/interfaces";
+import { AuthResponse, GifsUser, User } from "@/interfaces";
+import { authResponseMapper } from "@/utils";
 
 interface AuthProviderProps {
   children: React.ReactNode;
 }
 
 export interface AuthState {
-  user: GifsUser | null;
+  user: User | null;
 }
 
 export const AUTH_INITIAL_STATE: AuthState = {
@@ -77,13 +78,15 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
           body: JSON.stringify({ email, password }),
         }
       );
-      const data: AuthResponse = await response.json();
+      let data = await response.json();
+      data = authResponseMapper(data);
       if (data.ok) {
+        console.log(data);
         dispatch({
           type: "[AUTH] - login",
           payload: data.user!,
         });
-        Cookies.set("token", data.token!);
+        Cookies.set("token", data.token);
         return true;
       }
       toast.error("Invalid credentials", {
