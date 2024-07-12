@@ -15,7 +15,7 @@ export const RegisterModal = () => {
   };
   return (
     isRegisterModalOpen && (
-      <div className="absolute h-full w-full flex flex-col items-center justify-center bg-modal animate__animated animate__fadeIn animate__faster z-10">
+      <div className="absolute h-full w-full flex flex-col items-center justify-center bg-modal animate__animated animate__fadeIn animate__faster z-10 p-2">
         <div className="bg-black 2xl:w-[30vw] 2xl:h-[60vh] lg:h-[90vh] lg:w-[40vw] rounded-xl">
           <div className="flex items-center">
             <div className="ml-2 mt-2 w-9 h-9 rounded-full flex items-center justify-center hover:bg-gray-400 hover:bg-opacity-20 transition-colors duration-300 ease-in-out">
@@ -37,7 +37,7 @@ export const RegisterModal = () => {
             <h3 className="mt-2 text-xl font-bold">Paso {formStep} de 2</h3>
           </div>
 
-          <div className="px-20 flex flex-col gap-10">
+          <div className="flex flex-col items-center justify-center gap-10">
             <h3 className="text-3xl font-semibold mt-10">Crea tu cuenta</h3>
             <RegisterForm currentStep={formStep} setStep={setFormStep} />
           </div>

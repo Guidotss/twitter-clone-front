@@ -14,7 +14,7 @@ interface RegisterFormProps {
   setStep: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export const RegisterForm = ({ currentStep, setStep }: RegisterFormProps) => {
+export const RegisterForm = ({ currentStep, setStep }: Readonly<RegisterFormProps>) => {
   const router = useRouter(); 
   const { registerUser } = useContext(AuthContext);
   const [{ name, email }, setForm] = useState<RegisterForm>({
@@ -43,7 +43,7 @@ export const RegisterForm = ({ currentStep, setStep }: RegisterFormProps) => {
   };
 
   return (
-    <form className="flex flex-col 2xl:gap-y-20 lg:gap-y-10">
+    <form className="flex flex-col 2xl:gap-y-14 lg:gap-y-10">
       {currentStep === 1 ? (
         <>
           <FormInput
