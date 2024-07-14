@@ -93,7 +93,7 @@ export const RegisterForm = ({ currentStep, setStep }: Readonly<RegisterFormProp
               }
             />
           </div>
-          <div>
+          <div className="w-full flex flex-col">
             <input
               className={`bg-transparent border-[1px] border-gray-500 2xl:w-[430px] lg:w-[380px] rounded-md px-5 py-4 text-gray-500 text-md font-light focus:outline-none focus:border-twitter transition-colors duration-300 ease-in-out
               ${password.length < 10 ? "border-gray-300" : "border-red-500"}
@@ -110,7 +110,7 @@ export const RegisterForm = ({ currentStep, setStep }: Readonly<RegisterFormProp
               }
             />
             {password !== passwordConfirmation && (
-              <span className="text-xs font-light text-red-500">
+              <span className="text-xs font-light text-red-500 mt-2 ml-1">
                 Las contraseñas no coinciden
               </span>
             )}

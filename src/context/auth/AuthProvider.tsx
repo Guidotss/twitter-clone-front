@@ -135,6 +135,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         }
       );
       const data: AuthResponse = await response.json();
+      
       if (data.ok) {
         dispatch({
           type: "[AUTH] - login",
