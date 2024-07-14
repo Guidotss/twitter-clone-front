@@ -3,15 +3,14 @@ import { AuthResponse } from "@/interfaces";
 export const authResponseMapper = (data: any): AuthResponse => {
   return {
     ok: data.Ok,
-    code: data.Code,
     message: data.Message,
-    error: data.Error,
+    error: data.Error || [],
     token: data.Token,
     user: {
       id: data.User.id,
       name: data.User.name,
       email: data.User.email,
-      imageUrl: data.User.avatar,
+      imageUrl: data.User.avatar || "",
     },
   };
 };

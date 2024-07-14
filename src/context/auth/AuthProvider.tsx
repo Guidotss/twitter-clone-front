@@ -134,7 +134,9 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
           body: JSON.stringify(user),
         }
       );
-      const data: AuthResponse = await response.json();
+      let data = await response.json();
+      data = authResponseMapper(data); 
+      
       
       if (data.ok) {
         dispatch({
